@@ -1,5 +1,327 @@
+/*TODO================ RESET STYLE START =================*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol,
+ul {
+	list-style: none;
+}
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*TODO================ RESET STYLE END =================*/
+/*TODO================ COMMON STYLE START =================*/
+*,
+::before,
+::after {
+	box-sizing: border-box;
+}
+html {
+	scroll-behavior: smooth;
+	font-size: 10px;
+}
+:root {
+	--light: #fff;
+	--dark: #000;
+	--theme-color: #f7941d;
+}
+body {
+	font-size: 1.4rem;
+	background-color: var(--light);
+	color: var(--dark);
+	font-family: Roboto, sans-serif;
+}
+h1 {
+	font-size: 4rem;
+	margin: 20px 0 10px;
+	font-weight: bold;
+}
+a,
+::before,
+::after {
+	display: inline-flex;
+	text-decoration: none;
+	color: inherit;
+}
+input,
+select,
+textarea,
+button {
+	font: inherit;
+	color: inherit;
+}
+button {
+	cursor: pointer;
+}
+.icons-theme-1 {
+	font-size: 1.6rem;
+}
+/*TODO================ COMMON STYLE END =================*/
+/*TODO================ CAR-LIST START =================*/
 .card-img {
 	width: 100%;
 	height: 200px;
 	object-fit: cover;
 }
+.card-title {
+	font-size: 1.6rem;
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	transition: 0.3s;
+	line-height: 1;
+	display: inline-flex;
+	color: #007bd4;
+}
+.card-title:hover {
+	border-bottom: 1px solid;
+	padding: 0;
+}
+.card__properties {
+	columns: 2;
+	margin-bottom: 12px;
+}
+.card__property {
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+}
+.card__property i {
+	color: var(--theme-color);
+	margin-right: 7px;
+}
+._icon-vin.card__vin::before {
+	margin-right: 14px;
+	color: var(--light);
+}
+.card__vin {
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	border: 1px solid var(--theme-color);
+	border-radius: 5px;
+	padding: 7px;
+	display: inline-flex;
+	background: linear-gradient(
+		to right,
+		var(--theme-color) 0,
+		var(--theme-color) 28px,
+		#efe8e8c4 28px,
+		#efe8e8c4 100%
+	);
+	margin-bottom: 10px;
+}
+.card__title {
+	font-weight: 700;
+	text-decoration: underline;
+	margin-bottom: 10px;
+}
+.card__fuel {
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	width: 55%;
+}
+.card__fuel i {
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+}
+.card__fuel i::before {
+	font-size: 1.6rem;
+	font-weight: normal;
+	margin-right: 7px;
+	color: var(--theme-color);
+}
+.card-body {
+	padding-left: 25px;
+}
+.car-price {
+	font-size: 2.2rem;
+	font-weight: 600;
+	margin-bottom: 5px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+.card__lbox {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+.car-price::after {
+	content: attr(data-euro) "€";
+	color: #aeaeae;
+	font-size: 1.4rem;
+	font-weight: normal;
+	display: inline-block;
+	margin-top: 5px;
+	text-align: right;
+}
+.label {
+	font-size: 1.2rem;
+	border: 1px solid #dadada;
+	border-radius: 4px;
+	padding: 3px 6px;
+	display: inline-flex;
+}
+.card__labels {
+	margin-bottom: 7px;
+}
+.views,
+.date {
+	color: #aeaeae;
+	font-size: 1.2rem;
+	margin-bottom: 5px;
+}
+.card__interaction {
+	display: flex;
+	align-items: center;
+}
+.card__interaction i {
+	font-size: 3rem;
+}
+.card__interaction ._icon-compare {
+	font-size: 3.5rem;
+}
+.card__interaction button {
+	background-color: transparent;
+	border: none;
+}
+.card__interaction button,
+.card__interaction a {
+	padding: 5px 10px;
+	color: #dadada;
+	transition: 0.3s;
+}
+.card__interaction button:hover,
+.card__interaction a:hover,
+.card__interaction a:focus {
+	color: var(--theme-color);
+}
+#userStar.active,
+#userCompare.active {
+	color: var(--theme-color);
+}
+.card__saler {
+	margin-bottom: 5px;
+	font-weight: 700;
+}
+.card__saler i {
+	margin-right: 5px;
+	color: #198754;
+}
+/*TODO================ CAR-LIST END =================*/

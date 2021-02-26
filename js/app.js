@@ -25,6 +25,8 @@ const carListEl = document.getElementById("carList");
 //     "odo": 394036,
 //     "consume": { "road": 4.8, "city": 12.3, "mixed": 8.4 }
 //   }
+
+let euroExchange = 0.82;
 renderCards(CARS, carListEl);
 
 function renderCards(cars, carList) {
@@ -36,22 +38,63 @@ function renderCards(cars, carList) {
 }
 
 function createCardHTML(car) {
-	return `<div class="card mb-3">
-    <div class="row g-0">
-      <div class="col-4">
-        <img class="card-img" src="${car.img}" alt="${car.make} ${car.model}" loading="lazy" width="1" height="1" />
-      </div>
-      <div class="col-8">
-        <div class="card-body">
-          <h5 class="card-title text-primary">${car.make} ${car.model} ${car.engine_volume} (${car.year})</h5>
-          <h6 class="car-price text-success">${car.price}$</h6>
-          <a href="tel:${car.phone}" class="btn btn-success">Call</a>
-        </div>
-      </div>
-      <div class="col-12 card-footer text-muted d-flex justify-content-between">
-          <small class="text-muted">${car.timestamp}</small>
-          <small class="text-muted">${car.views}</small>
-        </div>
-    </div>
-  </div>`;
+	return `<div class="card mb-4 p-5">
+	<div class="row g-0">
+		<div class="col-4">
+			<img class="card-img" src="${car.img}" alt="${car.make} ${
+		car.model
+	}" loading="lazy" width="1"
+				height="1" />
+		</div>
+		<div class="col-8">
+			<div class="row card-body">
+				<div class="col-8">
+					<a href="#" class="card-title fw-bold mb-4">${car.make} ${car.year}(${
+		car.color
+	})</a>
+					<ul class="card__properties">
+						<li class="card__property mb-3"><i class="_icon-speed icons-theme-1"></i>${
+							car.odo
+						} km</li>
+						<li class="card__property"><i class="_icon-fuel icons-theme-1"></i>${
+							car.engine_volume
+						}L., ${car.fuel}</li>
+						<li class="card__property mb-3"><i class="_icon-broadcast icons-theme-1"></i>${
+							car.transmission
+						}</li>
+						<li class="card__property"><i class="_icon-nav icons-theme-1"></i>${
+							car.country
+						}</li>
+					</ul>
+					<h4 class="card__title">Fuel consumption (l/100 km)</h4>
+					<div class="card__fuel">
+					<i class="_icon-road">${car?.consume?.road || "n/a"}</i>
+						<i class="_icon-city">${car?.consume?.city || "n/a"}</i>
+						<i class="_icon-mix">${car?.consume?.mixed || "n/a"}</i>
+					</div>
+					<i class="_icon-vin card__vin">${car.vin || "Did not provide"}</i>
+				</div>
+				<div class="col-4 card__lbox">
+					<h6 class="car-price text-success" data-euro="${Math.round(
+						car.price * euroExchange
+					)}">${car.price} $</h6>
+					<h4 class="card__saler"><i class="_icon-user icons-theme-1"></i>${
+						car.seller
+					}</h4>
+					<div class="card__labels">
+						<span class="label">Bargain</span>
+						<span class="label">Exchange</span>
+					</div>
+					<span class="views">Views ${car.views}</span>
+					<span class="date">Created ${car.timestamp}</span>
+					<div class="card__interaction">
+						<a href="tel:${car.phone}"><i class="_icon-tel"></i></a>
+						<button id="userStar"><i class="_icon-star"></i></button>
+						<button id="userCompare"><i class="_icon-compare"></i></button>
+					</div>
+				</div>
+			</div>`;
 }
+
+userStar.onclick = () => userStar.classList.toggle("active");
+userCompare.onclick = () => userCompare.classList.toggle("active");

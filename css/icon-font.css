@@ -1,0 +1,68 @@
+@font-face {
+	font-family: "icomoon";
+	src: url("../fonts/icomoon.ttf?ap9lmr") format("truetype"),
+		url("../fonts/icomoon.woff?ap9lmr") format("woff"),
+		url("../fonts/icomoon.svg?ap9lmr#icomoon") format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+[class^="_icon-"],
+[class*=" _icon-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: "icomoon" !important;
+	speak-as: never;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+._icon-city:before {
+	content: "\e909";
+}
+._icon-road:before {
+	content: "\e90a";
+}
+._icon-mix:before {
+	content: "\e90b";
+}
+._icon-user:before {
+	content: "\e90c";
+}
+._icon-paint:before {
+	content: "\e90d";
+}
+._icon-tel:before {
+	content: "\e908";
+}
+._icon-star:before {
+	content: "\e900";
+}
+._icon-speed:before {
+	content: "\e901";
+}
+._icon-vin:before {
+	content: "\e902";
+}
+._icon-nav:before {
+	content: "\e903";
+}
+._icon-fuel:before {
+	content: "\e904";
+}
+._icon-compare:before {
+	content: "\e905";
+}
+._icon-clock:before {
+	content: "\e906";
+}
+._icon-broadcast:before {
+	content: "\e907";
+}
