@@ -38,7 +38,7 @@ function renderCards(cars, carList) {
 }
 
 function createCardHTML(car) {
-	const not = document.querySelectorAll("[data-car=not]");
+	const not = carListEl.querySelectorAll("[data-car=not]");
 	for (let key of not) {
 		key.remove();
 	}
