@@ -192,12 +192,15 @@ button {
 }
 .card__properties {
 	columns: 2;
-	margin-bottom: 12px;
+	margin-bottom: 5px;
 }
 .card__property {
 	display: flex;
 	align-items: center;
 	font-weight: bold;
+}
+.card__properties li {
+	margin-bottom: 10px;
 }
 .card__property i {
 	color: var(--theme-color);

@@ -20,6 +20,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 394036,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.8, city: 12.3, mixed: 8.4 },
 	},
 	{
@@ -43,6 +45,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "AT",
 		odo: 160572,
+		exchange: false,
+		bargain: false,
 		consume: { road: 3.2, city: 15.8, mixed: 8.8 },
 	},
 	{
@@ -66,6 +70,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 418116,
+		exchange: true,
+		bargain: null,
 		consume: { road: 5.4, city: 10.6, mixed: 9.2 },
 	},
 	{
@@ -79,7 +85,7 @@ const DATA = [
 		country: "Russia",
 		rating: 3,
 		price: 766,
-		views: 0,
+		views: 143,
 		seller: "Wenona Lockhead",
 		vip: false,
 		top: false,
@@ -89,6 +95,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "MT",
 		odo: 106393,
+		exchange: true,
+		bargain: null,
 		consume: { road: 4.7, city: 13.1, mixed: 9.6 },
 	},
 	{
@@ -112,6 +120,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "MT",
 		odo: 169993,
+		exchange: false,
+		bargain: true,
 		consume: { road: 6.1, city: 14.5, mixed: 7.0 },
 	},
 	{
@@ -135,6 +145,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 137570,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.4, city: 14.3, mixed: 8.5 },
 	},
 	{
@@ -158,6 +170,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "MT",
 		odo: 149695,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.4, city: 15.6, mixed: 7.0 },
 	},
 	{
@@ -180,8 +194,10 @@ const DATA = [
 		fuel: "Propane",
 		engine_volume: 1.6,
 		transmission: "MT",
-		odo: null,
-		consume: null,
+		odo: 426633,
+		exchange: false,
+		bargain: null,
+		consume: { road: 5.3, city: 10.4, mixed: 8.7 },
 	},
 	{
 		id: "51e51d6a8bf743c1ad1756c70b727c6a832c3ce5",
@@ -204,6 +220,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "MT",
 		odo: 442782,
+		exchange: true,
+		bargain: null,
 		consume: { road: 5.7, city: 10.1, mixed: 8.3 },
 	},
 	{
@@ -227,6 +245,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 199495,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.8, city: 13.8, mixed: 7.8 },
 	},
 	{
@@ -236,7 +256,7 @@ const DATA = [
 		year: 2007,
 		img: "http://dummyimage.com/172x239.jpg/ff4444/ffffff",
 		color: "Goldenrod",
-		vin: null,
+		vin: "WA1AGBFE9CD563876",
 		country: "Peru",
 		rating: 2,
 		price: 921,
@@ -250,6 +270,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "MT",
 		odo: 313408,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.9, city: 12.3, mixed: 8.2 },
 	},
 	{
@@ -273,7 +295,9 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "CVT",
 		odo: 298872,
-		consume: { city: 10.1, mixed: 7.4 },
+		exchange: false,
+		bargain: true,
+		consume: { road: 6.5, city: 10.1, mixed: 7.4 },
 	},
 	{
 		id: "5f518efa98bcd44b49c38ed13c6384e1620ae058",
@@ -296,6 +320,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "AT",
 		odo: 299777,
+		exchange: true,
+		bargain: null,
 		consume: { road: 4.9, city: 13.4, mixed: 8.7 },
 	},
 	{
@@ -319,6 +345,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 260025,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.3, city: 12.5, mixed: 9.5 },
 	},
 	{
@@ -342,6 +370,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "MT",
 		odo: 434402,
+		exchange: false,
+		bargain: true,
 		consume: { road: 4.2, city: 10.6, mixed: 7.2 },
 	},
 	{
@@ -365,7 +395,9 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "MT",
 		odo: 247310,
-		consume: { road: 6.2, mixed: 7.2 },
+		exchange: true,
+		bargain: true,
+		consume: { road: 6.2, city: 13.1, mixed: 7.2 },
 	},
 	{
 		id: "ee58ecc7f3f970307ea4b714149ddde8ddcd8537",
@@ -388,6 +420,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "MT",
 		odo: 434655,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.1, city: 11.6, mixed: 7.1 },
 	},
 	{
@@ -411,6 +445,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "MT",
 		odo: 230367,
+		exchange: false,
+		bargain: true,
 		consume: { road: 4.4, city: 10.7, mixed: 7.7 },
 	},
 	{
@@ -434,6 +470,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "AT",
 		odo: 48174,
+		exchange: true,
+		bargain: null,
 		consume: { road: 5.0, city: 13.1, mixed: 9.5 },
 	},
 	{
@@ -457,6 +495,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "MT",
 		odo: 276983,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.8, city: 12.9, mixed: 7.4 },
 	},
 	{
@@ -480,6 +520,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "MT",
 		odo: 452704,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.0, city: 15.9, mixed: 9.3 },
 	},
 	{
@@ -503,6 +545,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "AT",
 		odo: 160247,
+		exchange: false,
+		bargain: true,
 		consume: { road: 6.2, city: 10.3, mixed: 9.8 },
 	},
 	{
@@ -526,6 +570,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "AT",
 		odo: 311929,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.7, city: 11.9, mixed: 9.1 },
 	},
 	{
@@ -549,6 +595,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "CVT",
 		odo: 335880,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.8, city: 15.0, mixed: 8.2 },
 	},
 	{
@@ -572,6 +620,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "CVT",
 		odo: 359132,
+		exchange: true,
+		bargain: false,
 		consume: { road: 5.6, city: 10.7, mixed: 9.2 },
 	},
 	{
@@ -595,6 +645,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 69138,
+		exchange: false,
+		bargain: true,
 		consume: { road: 5.4, city: 11.5, mixed: 9.1 },
 	},
 	{
@@ -618,6 +670,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "CVT",
 		odo: 454542,
+		exchange: true,
+		bargain: false,
 		consume: { road: 4.3, city: 13.4, mixed: 9.9 },
 	},
 	{
@@ -641,6 +695,8 @@ const DATA = [
 		engine_volume: 3.6,
 		transmission: "AT",
 		odo: 190412,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.9, city: 11.8, mixed: 7.1 },
 	},
 	{
@@ -664,6 +720,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "AT",
 		odo: 462840,
+		exchange: true,
+		bargain: false,
 		consume: { road: 3.6, city: 13.4, mixed: 7.8 },
 	},
 	{
@@ -687,6 +745,8 @@ const DATA = [
 		engine_volume: 3.6,
 		transmission: "CVT",
 		odo: 396323,
+		exchange: false,
+		bargain: true,
 		consume: { road: 4.8, city: 12.9, mixed: 8.3 },
 	},
 	{
@@ -710,6 +770,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "MT",
 		odo: 85895,
+		exchange: true,
+		bargain: false,
 		consume: { road: 6.9, city: 13.6, mixed: 7.1 },
 	},
 	{
@@ -733,6 +795,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "AT",
 		odo: 460071,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.8, city: 11.7, mixed: 8.1 },
 	},
 	{
@@ -756,6 +820,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "AT",
 		odo: 113928,
+		exchange: false,
+		bargain: true,
 		consume: { road: 6.4, city: 14.6, mixed: 9.4 },
 	},
 	{
@@ -779,6 +845,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 380775,
+		exchange: true,
+		bargain: false,
 		consume: { road: 5.5, city: 11.9, mixed: 9.1 },
 	},
 	{
@@ -802,6 +870,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 171204,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.4, city: 10.3, mixed: 7.7 },
 	},
 	{
@@ -825,6 +895,8 @@ const DATA = [
 		engine_volume: 3.6,
 		transmission: "MT",
 		odo: 468545,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.3, city: 11.1, mixed: 7.6 },
 	},
 	{
@@ -848,6 +920,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 165566,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.2, city: 15.0, mixed: 9.1 },
 	},
 	{
@@ -871,6 +945,8 @@ const DATA = [
 		engine_volume: 3.6,
 		transmission: "AT",
 		odo: 56256,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.7, city: 14.6, mixed: 7.1 },
 	},
 	{
@@ -894,6 +970,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "MT",
 		odo: 357460,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.6, city: 15.1, mixed: 7.2 },
 	},
 	{
@@ -917,6 +995,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "AT",
 		odo: 90833,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.3, city: 16.0, mixed: 9.5 },
 	},
 	{
@@ -940,6 +1020,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "AT",
 		odo: 213198,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.2, city: 10.4, mixed: 7.4 },
 	},
 	{
@@ -963,6 +1045,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 262588,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.9, city: 11.3, mixed: 8.5 },
 	},
 	{
@@ -986,6 +1070,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "AT",
 		odo: 30639,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.4, city: 13.6, mixed: 7.4 },
 	},
 	{
@@ -1009,6 +1095,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "MT",
 		odo: 135800,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.3, city: 15.9, mixed: 7.6 },
 	},
 	{
@@ -1032,6 +1120,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "MT",
 		odo: 277395,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.9, city: 12.1, mixed: 8.2 },
 	},
 	{
@@ -1055,6 +1145,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "MT",
 		odo: 209039,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.8, city: 11.8, mixed: 7.7 },
 	},
 	{
@@ -1078,6 +1170,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 478986,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.7, city: 12.9, mixed: 8.0 },
 	},
 	{
@@ -1101,6 +1195,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 183533,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.5, city: 12.6, mixed: 8.7 },
 	},
 	{
@@ -1124,6 +1220,8 @@ const DATA = [
 		engine_volume: 3.6,
 		transmission: "CVT",
 		odo: 140901,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.9, city: 15.9, mixed: 9.3 },
 	},
 	{
@@ -1147,6 +1245,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "MT",
 		odo: 317351,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.0, city: 12.0, mixed: 7.5 },
 	},
 	{
@@ -1170,6 +1270,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 422771,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.5, city: 15.4, mixed: 8.7 },
 	},
 	{
@@ -1193,6 +1295,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 71829,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.9, city: 14.0, mixed: 8.9 },
 	},
 	{
@@ -1216,6 +1320,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "MT",
 		odo: 47240,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.0, city: 15.4, mixed: 9.4 },
 	},
 	{
@@ -1239,6 +1345,8 @@ const DATA = [
 		engine_volume: 3.6,
 		transmission: "MT",
 		odo: 445741,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.7, city: 11.4, mixed: 8.5 },
 	},
 	{
@@ -1262,6 +1370,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "AT",
 		odo: 363301,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.3, city: 13.9, mixed: 9.0 },
 	},
 	{
@@ -1285,6 +1395,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "AT",
 		odo: 376278,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.6, city: 14.1, mixed: 8.7 },
 	},
 	{
@@ -1308,6 +1420,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 74995,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.0, city: 15.5, mixed: 8.5 },
 	},
 	{
@@ -1331,6 +1445,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 355120,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.9, city: 14.7, mixed: 8.1 },
 	},
 	{
@@ -1354,6 +1470,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "MT",
 		odo: 193076,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.9, city: 11.9, mixed: 8.4 },
 	},
 	{
@@ -1377,6 +1495,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "AT",
 		odo: 128673,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.9, city: 10.1, mixed: 7.4 },
 	},
 	{
@@ -1400,6 +1520,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 200246,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.5, city: 14.0, mixed: 7.3 },
 	},
 	{
@@ -1423,6 +1545,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "AT",
 		odo: 291727,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.8, city: 12.0, mixed: 7.3 },
 	},
 	{
@@ -1446,6 +1570,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "MT",
 		odo: 250696,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.5, city: 14.9, mixed: 9.9 },
 	},
 	{
@@ -1469,6 +1595,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 492657,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.1, city: 14.4, mixed: 9.9 },
 	},
 	{
@@ -1492,6 +1620,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "AT",
 		odo: 454252,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.7, city: 13.7, mixed: 8.3 },
 	},
 	{
@@ -1515,6 +1645,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 465740,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.2, city: 15.5, mixed: 7.9 },
 	},
 	{
@@ -1538,6 +1670,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "MT",
 		odo: 309225,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.9, city: 10.6, mixed: 7.5 },
 	},
 	{
@@ -1561,6 +1695,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "MT",
 		odo: 178068,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.0, city: 11.2, mixed: 7.2 },
 	},
 	{
@@ -1584,6 +1720,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "AT",
 		odo: 201768,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.2, city: 13.7, mixed: 9.5 },
 	},
 	{
@@ -1607,6 +1745,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "CVT",
 		odo: 166499,
+		exchange: true,
+		bargain: true,
 		consume: { road: 7.0, city: 15.5, mixed: 8.9 },
 	},
 	{
@@ -1630,6 +1770,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "MT",
 		odo: 491190,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.6, city: 15.5, mixed: 8.9 },
 	},
 	{
@@ -1653,6 +1795,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "CVT",
 		odo: 208946,
+		exchange: true,
+		bargain: null,
 		consume: { road: 3.8, city: 15.5, mixed: 9.6 },
 	},
 	{
@@ -1676,6 +1820,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 241861,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.2, city: 11.5, mixed: 9.0 },
 	},
 	{
@@ -1699,6 +1845,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 444675,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.3, city: 11.9, mixed: 7.4 },
 	},
 	{
@@ -1722,6 +1870,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 141725,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.9, city: 10.2, mixed: 9.3 },
 	},
 	{
@@ -1745,6 +1895,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "CVT",
 		odo: 246783,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.6, city: 15.1, mixed: 9.8 },
 	},
 	{
@@ -1768,6 +1920,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 95471,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.1, city: 15.9, mixed: 7.8 },
 	},
 	{
@@ -1791,6 +1945,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 331279,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.5, city: 12.3, mixed: 8.0 },
 	},
 	{
@@ -1814,6 +1970,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 416535,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.9, city: 15.8, mixed: 7.9 },
 	},
 	{
@@ -1837,6 +1995,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "CVT",
 		odo: 52437,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.2, city: 14.2, mixed: 7.5 },
 	},
 	{
@@ -1860,6 +2020,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "MT",
 		odo: 223869,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.1, city: 13.5, mixed: 9.0 },
 	},
 	{
@@ -1883,6 +2045,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 91412,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.3, city: 15.8, mixed: 8.3 },
 	},
 	{
@@ -1906,6 +2070,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "AT",
 		odo: 466405,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.8, city: 12.3, mixed: 9.1 },
 	},
 	{
@@ -1929,6 +2095,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "CVT",
 		odo: 280477,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.3, city: 13.6, mixed: 7.6 },
 	},
 	{
@@ -1952,6 +2120,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "CVT",
 		odo: 457395,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.8, city: 11.7, mixed: 8.6 },
 	},
 	{
@@ -1975,6 +2145,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "AT",
 		odo: 242085,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.6, city: 12.9, mixed: 9.1 },
 	},
 	{
@@ -1998,6 +2170,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 353243,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.9, city: 14.4, mixed: 9.2 },
 	},
 	{
@@ -2021,6 +2195,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 427563,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.5, city: 11.6, mixed: 8.0 },
 	},
 	{
@@ -2044,6 +2220,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "AT",
 		odo: 166865,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.5, city: 10.6, mixed: 9.9 },
 	},
 	{
@@ -2067,6 +2245,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "MT",
 		odo: 358681,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.5, city: 15.5, mixed: 9.4 },
 	},
 	{
@@ -2090,6 +2270,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 286545,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.8, city: 10.2, mixed: 9.4 },
 	},
 	{
@@ -2113,6 +2295,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "AT",
 		odo: 435000,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.2, city: 15.2, mixed: 8.8 },
 	},
 	{
@@ -2136,6 +2320,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "MT",
 		odo: 356689,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.8, city: 10.3, mixed: 9.5 },
 	},
 	{
@@ -2159,6 +2345,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 280545,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.6, city: 10.4, mixed: 7.7 },
 	},
 	{
@@ -2182,6 +2370,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "AT",
 		odo: 303400,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.0, city: 14.7, mixed: 9.2 },
 	},
 	{
@@ -2205,6 +2395,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "AT",
 		odo: 262668,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.0, city: 10.6, mixed: 7.9 },
 	},
 	{
@@ -2228,6 +2420,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 313844,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.7, city: 15.4, mixed: 9.1 },
 	},
 	{
@@ -2251,6 +2445,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 413733,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.5, city: 14.6, mixed: 8.7 },
 	},
 	{
@@ -2274,6 +2470,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 137170,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.5, city: 10.7, mixed: 10.0 },
 	},
 	{
@@ -2297,6 +2495,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 484708,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.4, city: 11.7, mixed: 8.3 },
 	},
 	{
@@ -2320,6 +2520,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 151533,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.4, city: 11.7, mixed: 9.2 },
 	},
 	{
@@ -2343,6 +2545,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "AT",
 		odo: 323016,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.1, city: 12.2, mixed: 9.5 },
 	},
 	{
@@ -2366,6 +2570,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 472519,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.8, city: 10.1, mixed: 9.0 },
 	},
 	{
@@ -2389,6 +2595,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "MT",
 		odo: 180478,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.7, city: 15.1, mixed: 9.8 },
 	},
 	{
@@ -2412,6 +2620,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "CVT",
 		odo: 425701,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.9, city: 10.7, mixed: 8.7 },
 	},
 	{
@@ -2435,6 +2645,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "CVT",
 		odo: 202625,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.6, city: 10.5, mixed: 9.4 },
 	},
 	{
@@ -2458,6 +2670,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "MT",
 		odo: 362236,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.0, city: 11.3, mixed: 8.7 },
 	},
 	{
@@ -2481,6 +2695,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "MT",
 		odo: 134620,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.0, city: 10.9, mixed: 8.1 },
 	},
 	{
@@ -2504,6 +2720,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 122011,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.5, city: 11.0, mixed: 8.1 },
 	},
 	{
@@ -2527,6 +2745,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "AT",
 		odo: 137047,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.5, city: 10.2, mixed: 7.7 },
 	},
 	{
@@ -2550,6 +2770,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "AT",
 		odo: 259646,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.0, city: 10.4, mixed: 10.0 },
 	},
 	{
@@ -2573,6 +2795,8 @@ const DATA = [
 		engine_volume: 3.6,
 		transmission: "CVT",
 		odo: 251807,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.6, city: 10.1, mixed: 9.1 },
 	},
 	{
@@ -2596,6 +2820,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "CVT",
 		odo: 237187,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.8, city: 14.3, mixed: 8.8 },
 	},
 	{
@@ -2619,6 +2845,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "AT",
 		odo: 345355,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.1, city: 10.7, mixed: 7.8 },
 	},
 	{
@@ -2642,6 +2870,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "MT",
 		odo: 355463,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.0, city: 14.1, mixed: 8.4 },
 	},
 	{
@@ -2665,6 +2895,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "CVT",
 		odo: 275079,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.3, city: 11.6, mixed: 9.5 },
 	},
 	{
@@ -2688,6 +2920,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "AT",
 		odo: 412905,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.8, city: 12.0, mixed: 9.1 },
 	},
 	{
@@ -2711,6 +2945,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "CVT",
 		odo: 235651,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.6, city: 13.6, mixed: 7.2 },
 	},
 	{
@@ -2734,6 +2970,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "MT",
 		odo: 177392,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.6, city: 12.4, mixed: 8.8 },
 	},
 	{
@@ -2757,6 +2995,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "CVT",
 		odo: 313873,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.4, city: 11.3, mixed: 7.6 },
 	},
 	{
@@ -2780,6 +3020,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "MT",
 		odo: 209020,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.2, city: 15.9, mixed: 9.6 },
 	},
 	{
@@ -2803,6 +3045,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "MT",
 		odo: 301892,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.9, city: 15.8, mixed: 8.8 },
 	},
 	{
@@ -2826,6 +3070,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "AT",
 		odo: 282035,
+		exchange: true,
+		bargain: false,
 		consume: { road: 5.9, city: 15.3, mixed: 8.8 },
 	},
 	{
@@ -2849,6 +3095,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "CVT",
 		odo: 168494,
+		exchange: true,
+		bargain: false,
 		consume: { road: 4.9, city: 11.3, mixed: 7.1 },
 	},
 	{
@@ -2872,6 +3120,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "MT",
 		odo: 120206,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.1, city: 12.5, mixed: 8.9 },
 	},
 	{
@@ -2895,6 +3145,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "MT",
 		odo: 121582,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.7, city: 11.7, mixed: 9.4 },
 	},
 	{
@@ -2918,6 +3170,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "MT",
 		odo: 189779,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.6, city: 13.6, mixed: 7.1 },
 	},
 	{
@@ -2941,6 +3195,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 232637,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.7, city: 12.7, mixed: 7.3 },
 	},
 	{
@@ -2964,6 +3220,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "AT",
 		odo: 321753,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.5, city: 12.2, mixed: 7.1 },
 	},
 	{
@@ -2987,6 +3245,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "AT",
 		odo: 416991,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.4, city: 11.5, mixed: 9.5 },
 	},
 	{
@@ -3010,6 +3270,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "AT",
 		odo: 481063,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.5, city: 15.2, mixed: 8.6 },
 	},
 	{
@@ -3033,6 +3295,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "MT",
 		odo: 497820,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.7, city: 15.3, mixed: 9.4 },
 	},
 	{
@@ -3056,6 +3320,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "AT",
 		odo: 159955,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.0, city: 11.4, mixed: 9.2 },
 	},
 	{
@@ -3079,6 +3345,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "MT",
 		odo: 373345,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.4, city: 14.4, mixed: 8.5 },
 	},
 	{
@@ -3102,6 +3370,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 256910,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.1, city: 10.2, mixed: 8.7 },
 	},
 	{
@@ -3125,6 +3395,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "MT",
 		odo: 390277,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.9, city: 14.6, mixed: 8.2 },
 	},
 	{
@@ -3148,6 +3420,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "CVT",
 		odo: 381502,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.2, city: 12.9, mixed: 8.3 },
 	},
 	{
@@ -3171,6 +3445,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "CVT",
 		odo: 201854,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.2, city: 11.5, mixed: 7.8 },
 	},
 	{
@@ -3194,6 +3470,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "CVT",
 		odo: 394958,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.1, city: 15.2, mixed: 8.0 },
 	},
 	{
@@ -3217,6 +3495,8 @@ const DATA = [
 		engine_volume: 1.6,
 		transmission: "CVT",
 		odo: 447058,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.7, city: 13.4, mixed: 8.8 },
 	},
 	{
@@ -3240,6 +3520,8 @@ const DATA = [
 		engine_volume: 5.7,
 		transmission: "CVT",
 		odo: 342203,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.2, city: 13.6, mixed: 9.8 },
 	},
 	{
@@ -3263,6 +3545,8 @@ const DATA = [
 		engine_volume: 3.6,
 		transmission: "MT",
 		odo: 106926,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.0, city: 12.6, mixed: 8.9 },
 	},
 	{
@@ -3286,6 +3570,8 @@ const DATA = [
 		engine_volume: 2.4,
 		transmission: "CVT",
 		odo: 303780,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.1, city: 10.2, mixed: 7.1 },
 	},
 	{
@@ -3309,6 +3595,8 @@ const DATA = [
 		engine_volume: 2.7,
 		transmission: "MT",
 		odo: 352112,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.7, city: 10.1, mixed: 7.1 },
 	},
 	{
@@ -3332,6 +3620,8 @@ const DATA = [
 		engine_volume: 3.6,
 		transmission: "CVT",
 		odo: 400665,
+		exchange: true,
+		bargain: true,
 		consume: { road: 4.2, city: 14.6, mixed: 9.5 },
 	},
 	{
@@ -3355,6 +3645,8 @@ const DATA = [
 		engine_volume: 2,
 		transmission: "AT",
 		odo: 268024,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.4, city: 14.7, mixed: 8.0 },
 	},
 	{
@@ -3378,6 +3670,8 @@ const DATA = [
 		engine_volume: 3.2,
 		transmission: "MT",
 		odo: 179332,
+		exchange: true,
+		bargain: true,
 		consume: { road: 5.0, city: 10.1, mixed: 8.9 },
 	},
 	{
@@ -3401,6 +3695,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 345851,
+		exchange: true,
+		bargain: true,
 		consume: { road: 3.3, city: 15.0, mixed: 9.2 },
 	},
 	{
@@ -3424,6 +3720,8 @@ const DATA = [
 		engine_volume: 4.4,
 		transmission: "MT",
 		odo: 76991,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.7, city: 13.4, mixed: 7.3 },
 	},
 	{
@@ -3447,6 +3745,8 @@ const DATA = [
 		engine_volume: 1.4,
 		transmission: "CVT",
 		odo: 386737,
+		exchange: true,
+		bargain: true,
 		consume: { road: 6.0, city: 10.4, mixed: 8.3 },
 	},
 ];
