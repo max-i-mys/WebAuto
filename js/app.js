@@ -43,7 +43,7 @@ function createCardHTML(car) {
 		key.remove();
 	}
 	return `
-	<div class="card mb-4 p-5">
+	<div class="p-5 border-bottom">
 	<div class="row g-0">
 		<div class="col-4">
 			<img class="card-img" src="${car.img}" alt="${car.make} ${
