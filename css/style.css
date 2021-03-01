@@ -191,7 +191,8 @@ button {
 	padding: 0;
 }
 .card__properties {
-	columns: 2;
+	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: 5px;
 }
 .card__property {
@@ -201,6 +202,7 @@ button {
 }
 .card__properties li {
 	margin-bottom: 10px;
+	width: 50%;
 }
 .card__property i {
 	color: var(--theme-color);

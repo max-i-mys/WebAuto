@@ -1,7 +1,8 @@
 "use strict";
 const CARS = [...DATA];
 const carListEl = document.getElementById("carList");
-
+const euroExchange = 0.82;
+const testBtnEl = document.getElementById("testBtn");
 // {
 //     "id": "89aed5b8c686ebd713a62873e4cd756abab7a106",
 //     "make": "BMW",
@@ -26,7 +27,14 @@ const carListEl = document.getElementById("carList");
 //     "consume": { "road": 4.8, "city": 12.3, "mixed": 8.4 }
 //   }
 
-let euroExchange = 0.82;
+carListEl.addEventListener("click", (event) => {
+	console.log(event);
+	const btnEl = event.target.closest(".star-btn");
+	if (btnEl) {
+		console.log("star");
+	}
+});
+
 renderCards(CARS, carListEl);
 
 function renderCards(cars, carList) {
@@ -38,9 +46,13 @@ function renderCards(cars, carList) {
 }
 
 function createCardHTML(car) {
-	const not = carListEl.querySelectorAll("[data-car=not]");
-	for (let key of not) {
-		key.remove();
+	let starsHtml = "";
+	for (let i = 0; i < 5; i++) {
+		if (car.rating > i) {
+			starsHtml += `<i class="fas fa-star"></i>`;
+		} else {
+			starsHtml += `<i class="far fa-star"></i>`;
+		}
 	}
 	return `
 	<div class="p-5 border-bottom">
@@ -54,60 +66,71 @@ function createCardHTML(car) {
 		<div class="col-8">
 			<div class="row card-body">
 				<div class="col-7">
-					<a href="#" class="card-title fw-bold mb-4">${car.make} ${car.year}(${
+					<a href="#" class="card-title fw-bold mb-2">${car.make} ${car.year}(${
 		car.color
 	})</a>
+	<div class="card-rating text-warning mb-3">${car.rating} ${starsHtml}</div>
 					<ul class="card__properties">
-						<li class="card__property" data-car="${
-							car.odo || "not"
-						}"><i class="_icon-speed icons-theme-1"></i>${car.odo} km</li>
-						<li class="card__property" data-car="${
-							car.engine_volume || "not"
-						}"><i class="_icon-fuel icons-theme-1"></i>${
-		car.engine_volume
-	}L., ${car.fuel}</li>
-						<li class="card__property" data-car="${
-							car.transmission || "not"
-						}"><i class="_icon-broadcast icons-theme-1"></i>${
-		car.transmission
-	}</li>
-						<li class="card__property" data-car="${
-							car.country || "not"
-						}"><i class="_icon-nav icons-theme-1"></i>${car.country}</li>
+					${
+						car.odo
+							? `<li class="card__property"><i class="_icon-speed icons-theme-1"></i>${car.odo} km</li>`
+							: ""
+					}
+					${
+						car.engine_volume
+							? `<li class="card__property"><i class="_icon-fuel icons-theme-1"></i>${car.engine_volume}L., ${car.fuel}</li>`
+							: ""
+					}
+					${
+						car.transmission
+							? `<li class="card__property"><i class="_icon-broadcast icons-theme-1"></i>${car.transmission}</li>`
+							: ""
+					}
+					
+						${
+							car.country
+								? `<li class="card__property"><i class="_icon-nav icons-theme-1"></i>${car.country}</li>`
+								: ""
+						}
 					</ul>
 					<h4 class="card__title">Fuel consumption (l/100 km)</h4>
 					<div class="card__fuel">
-					<i class="_icon-road"}">${car?.consume?.road || "n/a"}</i>
-						<i class="_icon-city"}">${car?.consume?.city || "n/a"}</i>
-						<i class="_icon-mix" }">${car?.consume?.mixed || "n/a"}</i>
+					<i class="_icon-road">${car.consume?.road || "n/a"}</i>
+						<i class="_icon-city">${car.consume?.city || "n/a"}</i>
+						<i class="_icon-mix">${car.consume?.mixed || "n/a"}</i>
 					</div>
-					<i class="_icon-vin card__vin" data-car="${car.vin || "not"}">${car.vin}</i>
+					${car.vin ? `<i class="_icon-vin card__vin">${car.vin}</i>` : ""}
 				</div>
 				<div class="col-5 card__lbox">
-					<h6 class="car-price text-success" data-car="${
-						car.price || "not"
-					}" data-euro="${Math.round(car.price * euroExchange)}">${
-		car.price
-	} $</h6>
-					<h4 class="card__saler" data-car="${
-						car.seller || "not"
-					}"><i class="_icon-user icons-theme-1"></i>${car.seller}</h4>
+				${
+					car.price
+						? `<h6 class="car-price text-success" data-euro="${Math.round(
+								car.price * euroExchange
+						  )}">${car.price}</h6>`
+						: ""
+				}
+				${
+					car.seller
+						? `<h4 class="card__saler"><i class="_icon-user icons-theme-1"></i>${car.seller}</h4>`
+						: ""
+				}
 					<div class="card__labels">
-						<span class="label" data-car="${
-							car.bargain || car.bargain == false || "not"
-						}">${car.bargain ? "Bargain" : "Without bargain"}</span>
-						<span class="label" data-car="${car.exchange || "not"}">Exchange</span>
+					${
+						car.bargain || car.bargain == false
+							? `<span class="label">${
+									car.bargain ? "Bargain" : "Without bargain"
+							  }</span>`
+							: ""
+					}
+						${car.exchange ? `<span class="label">Exchange</span>` : ""}
 					</div>
 					<span class="views">Views ${car.views}</span>
 					<span class="date">Created ${car.timestamp}</span>
 					<div class="card__interaction">
 						<a href="tel:${car.phone}"><i class="_icon-tel"></i></a>
-						<button id="userStar"><i class="_icon-star"></i></button>
-						<button id="userCompare"><i class="_icon-compare"></i></button>
+						<button><i class="_icon-star"></i></button>
+						<button><i class="_icon-compare"></i></button>
 					</div>
 				</div>
 			</div>`;
 }
-
-userStar.onclick = () => userStar.classList.toggle("active");
-userCompare.onclick = () => userCompare.classList.toggle("active");
