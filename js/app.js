@@ -4,18 +4,46 @@
 const CARS = [...DATA]
 const carListEl = document.getElementById("carList")
 const euroExchange = 0.82
+const masonryBtnsEl = document.getElementById("masonryBtns")
 
 //!----------------------- Variable End ----------------------------//
 
 renderCards(CARS, carListEl)
 
+//*----------------------- Favorites and Comparison Start ----------------------------//
 carListEl.addEventListener("click", (event) => {
-	let btnInteractionEl = event.target.closest(".card__btn-interaction")
+	const btnInteractionEl = event.target.closest(".card__btn-interaction")
 	if (btnInteractionEl) {
 		btnInteractionEl.classList.toggle("active")
 	}
 })
+//*----------------------- Favorites and Comparison End ----------------------------//
 
+//*----------------------- Сhange the content output grid Start ----------------------------//
+masonryBtnsEl.addEventListener("click", (event) => {
+	const btnMasonryEl = event.target.closest(".btn")
+	if (btnMasonryEl) {
+		const action = btnMasonryEl.dataset.action
+		let carListMasonryCount = ""
+
+		carListEl.classList.forEach((className) => {
+			if (className.includes("row-cols-")) {
+				let index = className.lastIndexOf("-")
+				carListMasonryCount = className.slice(index + 1)
+			}
+		})
+		carListEl.classList.remove(`row-cols-${carListMasonryCount}`)
+		carListEl.classList.add(`row-cols-${action}`)
+	}
+
+	btnMasonryEl.classList.remove("btn-secondary")
+	btnMasonryEl.classList.add("btn-success")
+	getSimbildings(btnMasonryEl).forEach((sibling) => {
+		sibling.classList.remove("btn-success")
+		sibling.classList.add("btn-secondary")
+	})
+})
+//*----------------------- Сhange the content output grid Start ----------------------------//
 function renderCards(cars, carList) {
 	for (let i = 0; i < cars.length; i++) {
 		const car = cars[i]
@@ -38,13 +66,13 @@ function createCardHTML(car) {
 	return `
 	<div class="p-5 border-bottom">
 	<div class="row g-0">
-		<div class="col-4">
+		<div class="col-4 card-img-wrap">
 			<img class="card-img" src="${car.img}" alt="${car.make} ${
 		car.model
 	}" loading="lazy" width="1"
 				height="1" />
 		</div>
-		<div class="col-8">
+		<div class="col-8 card-body-wrap">
 			<div class="row card-body">
 				<div class="col-7">
 					<a href="#" class="card-title fw-bold mb-2">${car.make} ${car.year}(${
@@ -115,14 +143,11 @@ function createCardHTML(car) {
 				</div>
 			</div>`
 }
+//------------------------- Utils start--------------------------//
 
-// userStar.onclick = () => userStar.classList.toggle("active");
-// userCompare.onclick = () => userCompare.classList.toggle("active");
-
-// carListEl.addEventListener("click", (event) => {
-// 	console.log(event)
-// 	const btnEl = event.target.closest(".star-btn")
-// 	if (btnEl) {
-// 		console.log("star")
-// 	}
-// })
+function getSimbildings(domEl) {
+	return Array.from(domEl.parentElement.children).filter(
+		(value) => value != domEl
+	)
+}
+//------------------------- Utils end--------------------------//

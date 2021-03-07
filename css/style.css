@@ -172,6 +172,10 @@ button {
 }
 /*TODO================ COMMON STYLE END =================*/
 /*TODO================ CAR-LIST START =================*/
+.car-list.row-cols-2 .card-img-wrap,
+.car-list.row-cols-2 .card-body-wrap {
+	width: 100%;
+}
 .card-img {
 	width: 100%;
 	height: 200px;
