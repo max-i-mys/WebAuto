@@ -1,57 +1,38 @@
-"use strict";
-const CARS = [...DATA];
-const carListEl = document.getElementById("carList");
-const euroExchange = 0.82;
-const testBtnEl = document.getElementById("testBtn");
-// {
-//     "id": "89aed5b8c686ebd713a62873e4cd756abab7a106",
-//     "make": "BMW",
-//     "model": "M3",
-//     "year": 2010,
-//     "img": "http://dummyimage.com/153x232.jpg/cc0000/ffffff",
-//     "color": "Goldenrod",
-//     "vin": "1G6DW677550624991",
-//     "country": "United States",
-//     "rating": 1,
-//     "price": 2269,
-//     "views": 5,
-//     "seller": "Ellery Girardin",
-//     "vip": true,
-//     "top": false,
-//     "timestamp": "1601652988000",
-//     "phone": "+1 (229) 999-8553",
-//     "fuel": "Benzin",
-//     "engine_volume": 1.4,
-//     "transmission": "CVT",
-//     "odo": 394036,
-//     "consume": { "road": 4.8, "city": 12.3, "mixed": 8.4 }
-//   }
+"use strict"
+//!----------------------- Variable Start ----------------------------//
+
+const CARS = [...DATA]
+const carListEl = document.getElementById("carList")
+const euroExchange = 0.82
+
+//!----------------------- Variable End ----------------------------//
+
+renderCards(CARS, carListEl)
 
 carListEl.addEventListener("click", (event) => {
-	console.log(event);
-	const btnEl = event.target.closest(".star-btn");
-	if (btnEl) {
-		console.log("star");
+	let btnInteractionEl = event.target.closest(".card__btn-interaction")
+	if (btnInteractionEl) {
+		btnInteractionEl.classList.toggle("active")
 	}
-});
-
-renderCards(CARS, carListEl);
+})
 
 function renderCards(cars, carList) {
 	for (let i = 0; i < cars.length; i++) {
-		const car = cars[i];
-		const htmlString = createCardHTML(car);
-		carList.insertAdjacentHTML("beforeEnd", htmlString);
+		const car = cars[i]
+		const htmlString = createCardHTML(car)
+		carList.insertAdjacentHTML("beforeEnd", htmlString)
 	}
 }
 
 function createCardHTML(car) {
-	let starsHtml = "";
+	let starsHtml = ""
 	for (let i = 0; i < 5; i++) {
-		if (car.rating > i) {
-			starsHtml += `<i class="fas fa-star"></i>`;
+		if (car.rating > i && car.rating != i + 0.5) {
+			starsHtml += `<i class="fas fa-star"></i>`
+		} else if (car.rating == i + 0.5) {
+			starsHtml += `<i class="fas fa-star-half-alt"></i>`
 		} else {
-			starsHtml += `<i class="far fa-star"></i>`;
+			starsHtml += `<i class="far fa-star"></i>`
 		}
 	}
 	return `
@@ -69,7 +50,7 @@ function createCardHTML(car) {
 					<a href="#" class="card-title fw-bold mb-2">${car.make} ${car.year}(${
 		car.color
 	})</a>
-	<div class="card-rating text-warning mb-3">${car.rating} ${starsHtml}</div>
+	<div class="card-rating text-warning mb-3">${starsHtml}</div>
 					<ul class="card__properties">
 					${
 						car.odo
@@ -106,7 +87,7 @@ function createCardHTML(car) {
 					car.price
 						? `<h6 class="car-price text-success" data-euro="${Math.round(
 								car.price * euroExchange
-						  )}">${car.price}</h6>`
+						  )}">${car.price}$</h6>`
 						: ""
 				}
 				${
@@ -128,9 +109,20 @@ function createCardHTML(car) {
 					<span class="date">Created ${car.timestamp}</span>
 					<div class="card__interaction">
 						<a href="tel:${car.phone}"><i class="_icon-tel"></i></a>
-						<button><i class="_icon-star"></i></button>
-						<button><i class="_icon-compare"></i></button>
+						<button class="card__btn-interaction"><i class="_icon-star"></i></button>
+						<button class="card__btn-interaction"><i class="_icon-compare"></i></button>
 					</div>
 				</div>
-			</div>`;
+			</div>`
 }
+
+// userStar.onclick = () => userStar.classList.toggle("active");
+// userCompare.onclick = () => userCompare.classList.toggle("active");
+
+// carListEl.addEventListener("click", (event) => {
+// 	console.log(event)
+// 	const btnEl = event.target.closest(".star-btn")
+// 	if (btnEl) {
+// 		console.log("star")
+// 	}
+// })

@@ -317,9 +317,23 @@ button {
 .card__interaction a:focus {
 	color: var(--theme-color);
 }
-#userStar.active,
-#userCompare.active {
+.card__btn-interaction.active {
 	color: var(--theme-color);
+	animation: pulsing 2s;
+}
+@keyframes pulsing {
+	0% {
+		transform: scale(1, 1);
+	}
+	25% {
+		transform: scale(0.7, 0.7);
+	}
+	50% {
+		transform: scale(1.2, 1.2);
+	}
+	100% {
+		transform: scale(1, 1);
+	}
 }
 .card__saler {
 	margin-bottom: 5px;
