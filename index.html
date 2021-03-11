@@ -23,14 +23,23 @@
 		<h1 class="text-center">Car list</h1>
 		<hr />
 		<div class="row">
-			<div class="col-12 top-bar d-flex justify-content-end">
-				<div class="masonry-btns" id="masonryBtns">
-					<button class="btn btn-success" data-action="1"><i class="fas fa-bars"></i></button>
-					<button class="btn btn-secondary" data-action="2"><i class="fas fa-th-large"></i></button>
-				</div>
-			</div>
+
 			<div class="col-3 filter-bar"></div>
 			<div class="col-9 content-bar">
+				<div class="col-12 top-bar d-flex justify-content-between">
+					<select class="form-control" id="sortSelect">
+						<option value="" disabled selected>Сортировать по...</option>
+						<option value="price/1">По цене (от дешевых к дорогим)</option>
+						<option value="price/-1">По цене (от дорогих к дешевым)</option>
+						<option value="year/-1">По году (от новых к старым)</option>
+						<option value="year/1">По году (от старых к новым)</option>
+						<option value="make/1">По производителю (A-Я)</option>
+					</select>
+					<div class="masonry-btns" id="masonryBtns">
+						<button class="btn btn-success" data-action="1"><i class="fas fa-bars"></i></button>
+						<button class="btn btn-secondary" data-action="2"><i class="fas fa-th-large"></i></button>
+					</div>
+				</div>
 				<div class="row g-0 row-cols-1 car-list" id="carList">
 
 

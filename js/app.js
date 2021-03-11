@@ -5,6 +5,7 @@ const CARS = [...DATA]
 const carListEl = document.getElementById("carList")
 const euroExchange = 0.82
 const masonryBtnsEl = document.getElementById("masonryBtns")
+const sortSelectEl = document.getElementById("sortSelect")
 
 //!----------------------- Variable End ----------------------------//
 
@@ -43,8 +44,19 @@ masonryBtnsEl.addEventListener("click", (event) => {
 		sibling.classList.add("btn-secondary")
 	})
 })
+//*----------------------- Sort Start ----------------------------//
+sortSelectEl.addEventListener("change", function (event) {
+	const [key, order] = this.value.split("/")
+	CARS.sort((a, b) => {
+		return (a[key] - b[key]) * order
+	})
+	renderCards(CARS, carListEl)
+})
+//*----------------------- Sort End ----------------------------//
+
 //*----------------------- Сhange the content output grid Start ----------------------------//
 function renderCards(cars, carList) {
+	carList.innerHTML = ""
 	for (let i = 0; i < cars.length; i++) {
 		const car = cars[i]
 		const htmlString = createCardHTML(car)
@@ -64,9 +76,9 @@ function createCardHTML(car) {
 		}
 	}
 	return `
-	<div class="p-5 border-bottom">
+	<div class="py-5 border-bottom">
 	<div class="row g-0">
-		<div class="col-4 card-img-wrap">
+		<div class="col-4 card-img-wrap d-flex align-items-center">
 			<img class="card-img" src="${car.img}" alt="${car.make} ${
 		car.model
 	}" loading="lazy" width="1"
