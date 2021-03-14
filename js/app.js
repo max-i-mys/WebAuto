@@ -48,7 +48,11 @@ masonryBtnsEl.addEventListener("click", (event) => {
 sortSelectEl.addEventListener("change", function (event) {
 	const [key, order] = this.value.split("/")
 	CARS.sort((a, b) => {
-		return (a[key] - b[key]) * order
+		if (Number(a[key]) && Number(b[key])) {
+			return (a[key] - b[key]) * order
+		} else if (String(a[key]) && String(b[key])) {
+			return a[key].localeCompare(b[key]) * order
+		}
 	})
 	renderCards(CARS, carListEl)
 })
@@ -78,11 +82,18 @@ function createCardHTML(car) {
 	return `
 	<div class="py-5 border-bottom">
 	<div class="row g-0">
-		<div class="col-4 card-img-wrap d-flex align-items-center">
+		<div class="col-4 card-img-wrap d-flex position-relative">
 			<img class="card-img" src="${car.img}" alt="${car.make} ${
 		car.model
 	}" loading="lazy" width="1"
 				height="1" />
+				${
+					car.vip
+						? `<div class="vip__card-wrap">
+						<div class="card__vip"><span>V</span><span>I</span><span>P</span></div>
+						</div>`
+						: ""
+				}
 		</div>
 		<div class="col-8 card-body-wrap">
 			<div class="row card-body">

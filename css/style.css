@@ -189,8 +189,36 @@ button {
 }
 .card-img {
 	width: 100%;
-	height: 200px;
+	height: 220px;
 	object-fit: cover;
+}
+.vip__card-wrap {
+	position: absolute;
+	top: 0;
+	left: 10px;
+	color: var(--light);
+	font-style: italic;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.card__vip {
+	background-color: #198754;
+	position: relative;
+	width: 30px;
+	height: 55px;
+	font-size: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 5px;
+}
+.card__vip::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 100%;
+	border-left: 15px solid #198754;
+	border-right: 15px solid #198754;
+	border-bottom: 14px solid transparent;
 }
 .card-title {
 	font-size: 1.6rem;
