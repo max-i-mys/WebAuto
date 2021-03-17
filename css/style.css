@@ -455,4 +455,7 @@ button {
 .content__search:hover .content__submit {
 	color: var(--theme-color);
 }
+input[type="search"]::-webkit-search-cancel-button {
+	display: none;
+}
 /*TODO================ CAR-LIST END =================*/
