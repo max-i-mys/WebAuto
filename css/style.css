@@ -138,6 +138,7 @@ html {
 	--light: #fff;
 	--dark: #000;
 	--theme-color: #f7941d;
+	--theme-color-2: #198754;
 }
 body {
 	font-size: 1.4rem;
@@ -201,7 +202,7 @@ button {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .card__vip {
-	background-color: #198754;
+	background-color: var(--theme-color-2);
 	position: relative;
 	width: 30px;
 	height: 55px;
@@ -216,8 +217,8 @@ button {
 	display: block;
 	position: absolute;
 	top: 100%;
-	border-left: 15px solid #198754;
-	border-right: 15px solid #198754;
+	border-left: 15px solid var(--theme-color-2);
+	border-right: 15px solid var(--theme-color-2);
 	border-bottom: 14px solid transparent;
 }
 .card-title {
@@ -395,14 +396,63 @@ button {
 }
 .card__saler i {
 	margin-right: 5px;
-	color: #198754;
+	color: var(--theme-color-2);
 }
-#sortSelect {
+.content__sort {
 	appearance: none;
-	padding: 8px;
+	padding: 5px 8px;
 	width: 35%;
 	font-family: inherit;
 	font-size: 15px;
 	box-shadow: none;
+}
+.content__search {
+	font-size: 15px;
+	width: 12%;
+	right: 8%;
+	transition: 0.4s;
+}
+.content__search.active {
+	width: 40%;
+}
+.content__search.active .content__input {
+	box-shadow: 0px 0px 10px #f7951d7a;
+	border-color: var(--theme-color);
+}
+.content__search.active .content__submit {
+	color: var(--theme-color);
+}
+.content__input {
+	padding: 5px 5px 5px 31px;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #ced4da;
+	line-height: 1.5;
+	border-radius: 15px;
+	transition: 0.3s;
+}
+.content__input:hover,
+.content__input:focus {
+	outline: none;
+	border-color: var(--theme-color);
+}
+.content__input:focus {
+	box-shadow: 0px 0px 10px #f7951d7a;
+}
+.content__submit {
+	position: absolute;
+	background-color: transparent;
+	color: var(--theme-color-2);
+	outline: none;
+	border: none;
+	display: inline-flex;
+	height: 100%;
+	align-items: center;
+	font-size: 15px;
+	transition: 0.3s;
+	left: 3px;
+}
+.content__search:hover .content__submit {
+	color: var(--theme-color);
 }
 /*TODO================ CAR-LIST END =================*/

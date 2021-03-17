@@ -1,12 +1,12 @@
 "use strict"
 //!----------------------- Variable Start ----------------------------//
 
-const CARS = [...DATA]
+let CARS = JSON.parse(DATA)
 const carListEl = document.getElementById("carList")
 const euroExchange = 0.82
 const masonryBtnsEl = document.getElementById("masonryBtns")
 const sortSelectEl = document.getElementById("sortSelect")
-
+const searchFormEl = document.getElementById("searchForm")
 //!----------------------- Variable End ----------------------------//
 
 renderCards(CARS, carListEl)
@@ -48,15 +48,58 @@ masonryBtnsEl.addEventListener("click", (event) => {
 sortSelectEl.addEventListener("change", function (event) {
 	const [key, order] = this.value.split("/")
 	CARS.sort((a, b) => {
-		if (Number(a[key]) && Number(b[key])) {
+		if (typeof a[key] != "string") {
 			return (a[key] - b[key]) * order
-		} else if (String(a[key]) && String(b[key])) {
+		} else {
 			return a[key].localeCompare(b[key]) * order
 		}
 	})
 	renderCards(CARS, carListEl)
 })
 //*----------------------- Sort End ----------------------------//
+
+//*----------------------- Search Start ----------------------------//
+searchFormEl.addEventListener("submit", function (event) {
+	event.preventDefault()
+	const query = this.search.value
+		.trim()
+		.toLowerCase()
+		.split(" ")
+		.filter((word) => !!word)
+	const searchFields = ["make", "model", "year"]
+
+	CARS = JSON.parse(DATA).filter((car) => {
+		return query.every((word) => {
+			return searchFields.some((field) => {
+				return String(car[field]).trim().toLowerCase().includes(word)
+			})
+		})
+	})
+
+	renderCards(CARS, carListEl)
+	// this.reset()
+})
+
+searchFormEl.addEventListener("click", function (event) {
+	const searchInputEl = event.target.closest(".content__input")
+	if (searchInputEl) {
+		if (!this.classList.contains("active")) {
+			this.classList.add("active")
+		}
+	} else {
+		return
+	}
+})
+document.addEventListener("click", (event) => {
+	if (!event.target.closest(".content__input")) {
+		if (searchFormEl.classList.contains("active")) {
+			searchFormEl.classList.remove("active")
+		}
+	} else {
+		return
+	}
+})
+//*----------------------- Search End ----------------------------//
 
 //*----------------------- Сhange the content output grid Start ----------------------------//
 function renderCards(cars, carList) {
@@ -98,9 +141,9 @@ function createCardHTML(car) {
 		<div class="col-8 card-body-wrap">
 			<div class="row card-body">
 				<div class="col-7">
-					<a href="#" class="card-title fw-bold mb-2">${car.make} ${car.year}(${
-		car.color
-	})</a>
+					<a href="#" class="card-title fw-bold mb-2">${car.make} ${car.model} ${
+		car.year
+	}(${car.color})</a>
 	<div class="card-rating text-warning mb-3">${starsHtml}</div>
 					<ul class="card__properties">
 					${
