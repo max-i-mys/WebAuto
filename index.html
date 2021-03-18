@@ -23,10 +23,15 @@
 		<h1 class="text-center">Car list</h1>
 		<hr />
 		<div class="row">
+			<div class="col-3 filter-bar">
+				<form id="filterForm" class="filter">
 
-			<div class="col-3 filter-bar"></div>
+					<button type="submit">Submit</button>
+					<button type="reset">Reset</button>
+				</form>
+			</div>
 			<div class="col-9 content-bar">
-				<div class="col-12 top-bar d-flex justify-content-between">
+				<div class="col-12 top-bar d-flex">
 					<select class="form-control content__sort" id="sortSelect">
 						<option value="" disabled selected>Сортировать по...</option>
 						<option value="price/1">По цене (от дешевых к дорогим)</option>
@@ -43,11 +48,9 @@
 						<option value="vip/-1">Сначала VIP</option>
 					</select>
 
-					<form id="searchForm" class="content__search position-absolute">
-						<div class="position-relative">
-							<input type="search" placeholder="Search" name="search" class="content__input" />
-							<button class="content__submit" type="submit"><i class="fas fa-search"></i></button>
-						</div>
+					<form id="searchForm" class="content__search">
+						<input type="search" placeholder="Search" name="search" class="content__input" />
+						<button class="content__btn" type="submit"><i class="fas fa-search"></i></button>
 					</form>
 
 					<div class="masonry-btns" id="masonryBtns">

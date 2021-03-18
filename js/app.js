@@ -7,6 +7,7 @@ const euroExchange = 0.82
 const masonryBtnsEl = document.getElementById("masonryBtns")
 const sortSelectEl = document.getElementById("sortSelect")
 const searchFormEl = document.getElementById("searchForm")
+const filterFormEl = document.getElementById("filterForm")
 //!----------------------- Variable End ----------------------------//
 
 renderCards(CARS, carListEl)
@@ -77,30 +78,45 @@ searchFormEl.addEventListener("submit", function (event) {
 	})
 
 	renderCards(CARS, carListEl)
-	// this.reset()
-})
-
-searchFormEl.addEventListener("click", function (event) {
-	const searchInputEl = event.target.closest(".content__input")
-	if (searchInputEl) {
-		if (!this.classList.contains("active")) {
-			this.classList.add("active")
-		}
-	} else {
-		return
-	}
-})
-document.addEventListener("click", (event) => {
-	if (!event.target.closest(".content__input")) {
-		if (searchFormEl.classList.contains("active")) {
-			searchFormEl.classList.remove("active")
-		}
-	} else {
-		return
-	}
 })
 //*----------------------- Search End ----------------------------//
 
+//*----------------------- Filter Start ----------------------------//
+
+renderFilterForm(CARS, filterFormEl)
+
+function renderFilterForm(cars, filterForm) {
+	filterForm.insertAdjacentHTML("afterBegin", createFilterForm(cars))
+}
+
+function createFilterForm(cars) {
+	const filterFields = ["make", "fuel", "transmission"]
+	let fieldsetsHtml = ""
+	filterFields.forEach((field) => {
+		const values = new Set(cars.map((car) => car[field]).sort())
+		fieldsetsHtml += createFilterFieldset(field, values)
+	})
+	return fieldsetsHtml
+}
+
+function createFilterFieldset(field, values) {
+	let inputsHtml = ""
+	values.forEach((value) => (inputsHtml += createFilterCheckbox(field, value)))
+	return `<fieldset class="mb-3">
+				<legend class="mb-3 filter__legend">${field}</legend>
+				<div class="inputs-list">
+					${inputsHtml}
+				</div>
+			</fieldset>`
+}
+function createFilterCheckbox(field, value) {
+	return `<label class="d-flex filter__label">
+		<input type="checkbox" name="${field}" value="${value}" class="filter__checkbox">
+		<span>${value}</span>
+	</label>`
+}
+
+//*----------------------- Filter End ----------------------------//
 //*----------------------- Сhange the content output grid Start ----------------------------//
 function renderCards(cars, carList) {
 	carList.innerHTML = ""
