@@ -102,7 +102,7 @@ function createFilterForm(cars) {
 function createFilterFieldset(field, values) {
 	let inputsHtml = ""
 	values.forEach((value) => (inputsHtml += createFilterCheckbox(field, value)))
-	return `<fieldset class="mb-3">
+	return `<fieldset class="mb-3 filter__fildset">
 				<legend class="mb-3 filter__legend">${field}</legend>
 				<div class="inputs-list">
 					${inputsHtml}

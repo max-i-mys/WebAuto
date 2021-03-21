@@ -171,6 +171,14 @@ button {
 .icons-theme-1 {
 	font-size: 1.6rem;
 }
+.btn-common {
+	background: transparent;
+	padding: 10px;
+	min-width: 80px;
+	border-radius: 20px;
+	border: 2px solid;
+	transition: 0.3s;
+}
 /*TODO================ COMMON STYLE END =================*/
 /*TODO================ CAR-LIST START =================*/
 .car-list.row-cols-2 .card-img-wrap,
@@ -461,6 +469,7 @@ button {
 	top: 0;
 	overflow: auto;
 	max-height: 100vh;
+	padding: 10px 0;
 }
 .filter__checkbox {
 	visibility: hidden;
@@ -477,12 +486,14 @@ button {
 	text-align: left;
 	margin-left: auto;
 }
+
 .filter__checkbox + span {
 	height: 30px;
 	display: flex;
 	align-items: center;
-	margin-right: 10px;
 	transition: 0.4s;
+	width: 50%;
+	justify-content: center;
 }
 .filter__legend::first-letter {
 	text-transform: capitalize;
@@ -490,11 +501,43 @@ button {
 .filter__legend {
 	font-size: 18px;
 	font-weight: bold;
+	text-align: center;
+	text-decoration: underline;
 }
 .filter__label {
 	cursor: pointer;
 }
 .filter__label:hover span {
 	color: #198754c7;
+}
+.inputs-list {
+	background: linear-gradient(
+		90deg,
+		transparent 49%,
+		rgba(191, 191, 191, 1) 50%,
+		transparent 51%
+	);
+}
+.filter__btn-wrap {
+	display: flex;
+	justify-content: center;
+}
+.btn-common[type="reset"] {
+	color: #007bd4;
+	border-color: #007bd4;
+}
+.btn-common[type="submit"] {
+	color: var(--theme-color-2);
+	border-color: var(--theme-color-2);
+	margin-right: 10px;
+}
+.btn-common:hover {
+	color: var(--light);
+}
+.btn-common[type="reset"]:hover {
+	background-color: #007bd4;
+}
+.btn-common[type="submit"]:hover {
+	background-color: var(--theme-color-2);
 }
 /*TODO================ Filter end =================*/
