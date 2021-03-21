@@ -80,7 +80,7 @@ searchFormEl.addEventListener("submit", function (event) {
 	renderCards(CARS, carListEl)
 })
 //*----------------------- Search End ----------------------------//
-
+let i = 0
 //*----------------------- Filter Start ----------------------------//
 
 renderFilterForm(CARS, filterFormEl)
@@ -104,7 +104,7 @@ function createFilterFieldset(field, values) {
 	values.forEach((value) => (inputsHtml += createFilterCheckbox(field, value)))
 	return `<fieldset class="mb-3 filter__fildset">
 				<legend class="mb-3 filter__legend">${field}</legend>
-				<div class="inputs-list">
+				<div class="inputs-list" data-count="${i++}">
 					${inputsHtml}
 				</div>
 			</fieldset>`
@@ -233,3 +233,40 @@ function getSimbildings(domEl) {
 	)
 }
 //------------------------- Utils end--------------------------//
+
+let divsListEl = filterFormEl.querySelectorAll(".inputs-list")
+
+const heightDivsList = Array.from(divsListEl).map((item) => item.clientHeight)
+
+divsListEl.forEach((item) => item.setAttribute("style", "height: 0"))
+
+filterFormEl.addEventListener("click", (event) => {
+	const filterLegendEl = event.target.closest(".filter__legend")
+
+	if (filterLegendEl) {
+		filterLegendEl.classList.toggle("active")
+
+		const divListEl = event.target
+			.closest(".filter__fildset")
+			.querySelector(".inputs-list")
+
+		const heightDivList = heightDivsList[divListEl.dataset.count]
+
+		if (filterLegendEl.classList.contains("active")) {
+			if (heightDivList > 600 && heightDivList < 1000) {
+				divListEl.setAttribute(
+					"style",
+					`height: ${heightDivList}px; transition: 1s`
+				)
+			} else if (heightDivList > 1000) {
+				divListEl.setAttribute(
+					"style",
+					`height: ${heightDivList}px; transition: 1.5s`
+				)
+			} else divListEl.setAttribute("style", `height: ${heightDivList}px`)
+		} else {
+			divListEl.style.height = "0"
+		}
+		console.log(heightDivList)
+	} else return
+})

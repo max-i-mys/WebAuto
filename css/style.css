@@ -517,6 +517,8 @@ button {
 		rgba(191, 191, 191, 1) 50%,
 		transparent 51%
 	);
+	overflow: hidden;
+	transition: 0.4s;
 }
 .filter__btn-wrap {
 	display: flex;
