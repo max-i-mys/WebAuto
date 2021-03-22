@@ -1,6 +1,5 @@
 "use strict"
 //!----------------------- Variable Start ----------------------------//
-
 let CARS = JSON.parse(DATA)
 const carListEl = document.getElementById("carList")
 const euroExchange = 0.82
@@ -8,6 +7,7 @@ const masonryBtnsEl = document.getElementById("masonryBtns")
 const sortSelectEl = document.getElementById("sortSelect")
 const searchFormEl = document.getElementById("searchForm")
 const filterFormEl = document.getElementById("filterForm")
+let dataIter = 0
 //!----------------------- Variable End ----------------------------//
 
 renderCards(CARS, carListEl)
@@ -80,7 +80,6 @@ searchFormEl.addEventListener("submit", function (event) {
 	renderCards(CARS, carListEl)
 })
 //*----------------------- Search End ----------------------------//
-let i = 0
 //*----------------------- Filter Start ----------------------------//
 
 renderFilterForm(CARS, filterFormEl)
@@ -103,8 +102,8 @@ function createFilterFieldset(field, values) {
 	let inputsHtml = ""
 	values.forEach((value) => (inputsHtml += createFilterCheckbox(field, value)))
 	return `<fieldset class="mb-3 filter__fildset">
-				<legend class="mb-3 filter__legend">${field}</legend>
-				<div class="inputs-list" data-count="${i++}">
+				<legend class="mb-3 filter__legend">${field}<i class="fas fa-caret-right"></i></legend>
+				<div class="inputs-list" data-input_number="${dataIter++}">
 					${inputsHtml}
 				</div>
 			</fieldset>`
@@ -250,7 +249,7 @@ filterFormEl.addEventListener("click", (event) => {
 			.closest(".filter__fildset")
 			.querySelector(".inputs-list")
 
-		const heightDivList = heightDivsList[divListEl.dataset.count]
+		const heightDivList = heightDivsList[divListEl.dataset.input_number]
 
 		if (filterLegendEl.classList.contains("active")) {
 			if (heightDivList > 600 && heightDivList < 1000) {
