@@ -7,13 +7,12 @@ const masonryBtnsEl = document.getElementById("masonryBtns")
 const sortSelectEl = document.getElementById("sortSelect")
 const searchFormEl = document.getElementById("searchForm")
 const filterFormEl = document.getElementById("filterForm")
-let dataIter = 0
 //!----------------------- Variable End ----------------------------//
 
 renderCards(CARS, carListEl)
 
 //*----------------------- Favorites and Comparison Start ----------------------------//
-carListEl.addEventListener("click", (event) => {
+carListEl.addEventListener("click", event => {
 	const btnInteractionEl = event.target.closest(".card__btn-interaction")
 	if (btnInteractionEl) {
 		btnInteractionEl.classList.toggle("active")
@@ -22,13 +21,13 @@ carListEl.addEventListener("click", (event) => {
 //*----------------------- Favorites and Comparison End ----------------------------//
 
 //*----------------------- Сhange the content output grid Start ----------------------------//
-masonryBtnsEl.addEventListener("click", (event) => {
+masonryBtnsEl.addEventListener("click", event => {
 	const btnMasonryEl = event.target.closest(".btn")
 	if (btnMasonryEl) {
 		const action = btnMasonryEl.dataset.action
 		let carListMasonryCount = ""
 
-		carListEl.classList.forEach((className) => {
+		carListEl.classList.forEach(className => {
 			if (className.includes("row-cols-")) {
 				let index = className.lastIndexOf("-")
 				carListMasonryCount = className.slice(index + 1)
@@ -40,7 +39,7 @@ masonryBtnsEl.addEventListener("click", (event) => {
 
 	btnMasonryEl.classList.remove("btn-secondary")
 	btnMasonryEl.classList.add("btn-success")
-	getSimbildings(btnMasonryEl).forEach((sibling) => {
+	getSimbildings(btnMasonryEl).forEach(sibling => {
 		sibling.classList.remove("btn-success")
 		sibling.classList.add("btn-secondary")
 	})
@@ -66,12 +65,12 @@ searchFormEl.addEventListener("submit", function (event) {
 		.trim()
 		.toLowerCase()
 		.split(" ")
-		.filter((word) => !!word)
+		.filter(word => !!word)
 	const searchFields = ["make", "model", "year"]
 
-	CARS = JSON.parse(DATA).filter((car) => {
-		return query.every((word) => {
-			return searchFields.some((field) => {
+	CARS = JSON.parse(DATA).filter(car => {
+		return query.every(word => {
+			return searchFields.some(field => {
 				return String(car[field]).trim().toLowerCase().includes(word)
 			})
 		})
@@ -82,6 +81,45 @@ searchFormEl.addEventListener("submit", function (event) {
 //*----------------------- Search End ----------------------------//
 //*----------------------- Filter Start ----------------------------//
 
+//----------//
+
+filterFormEl.addEventListener("submit", function (event) {
+	event.preventDefault()
+
+	filtering(this)
+	renderCards(CARS, carListEl)
+})
+
+function filtering(formEl) {
+	const query = []
+	const filterFields = ["make", "fuel", "transmission"]
+
+	filterFields.forEach(field => {
+		const inputs =
+			formEl[field].length > 0 ? Array.from(formEl[field]) : [formEl[field]]
+		query.push(
+			inputs.reduce((acc, input) => {
+				if (input.checked) {
+					return [...acc, input.value]
+				} else {
+					return acc
+				}
+			}, [])
+		)
+	})
+	console.log(query)
+	CARS = JSON.parse(DATA).filter(car => {
+		return query.every((values, i) => {
+			return values.length == 0
+				? true
+				: values.includes(String(car[filterFields[i]]))
+		})
+	})
+	return CARS.length
+}
+
+//----------//
+
 renderFilterForm(CARS, filterFormEl)
 
 function renderFilterForm(cars, filterForm) {
@@ -89,10 +127,17 @@ function renderFilterForm(cars, filterForm) {
 }
 
 function createFilterForm(cars) {
-	const filterFields = ["make", "fuel", "transmission"]
+	const filterFields = [
+		"make",
+		"year",
+		"color",
+		"country",
+		"fuel",
+		"transmission",
+	]
 	let fieldsetsHtml = ""
-	filterFields.forEach((field) => {
-		const values = new Set(cars.map((car) => car[field]).sort())
+	filterFields.forEach(field => {
+		const values = new Set(cars.map(car => car[field]).sort())
 		fieldsetsHtml += createFilterFieldset(field, values)
 	})
 	return fieldsetsHtml
@@ -100,11 +145,13 @@ function createFilterForm(cars) {
 
 function createFilterFieldset(field, values) {
 	let inputsHtml = ""
-	values.forEach((value) => (inputsHtml += createFilterCheckbox(field, value)))
+	values.forEach(value => (inputsHtml += createFilterCheckbox(field, value)))
 	return `<fieldset class="mb-3 filter__fildset">
 				<legend class="mb-3 filter__legend">${field}<i class="fas fa-caret-right"></i></legend>
-				<div class="inputs-list" data-input_number="${dataIter++}">
-					${inputsHtml}
+				<div class="inputs-list-wrap">
+					<div class="inputs-list">
+						${inputsHtml}
+					</div>
 				</div>
 			</fieldset>`
 }
@@ -114,8 +161,27 @@ function createFilterCheckbox(field, value) {
 		<span>${value}</span>
 	</label>`
 }
-
 //*----------------------- Filter End ----------------------------//
+
+//*----------------------- Filter Accordeon Menu Start ----------------------------//
+filterFormEl.addEventListener("click", function (event) {
+	const nameLegendEl = event.target.closest(".filter__legend")
+	if (nameLegendEl) {
+		const filterFieldsetEl = event.target.closest(".filter__fildset")
+
+		if (!filterFieldsetEl.classList.contains("active")) {
+			filterFieldsetEl.classList.add("active")
+			filterFieldsetEl.querySelector(".inputs-list-wrap").style.height =
+				filterFieldsetEl.querySelector(".inputs-list").getBoundingClientRect()
+					.height + "px"
+		} else {
+			filterFieldsetEl.classList.remove("active")
+			filterFieldsetEl.querySelector(".inputs-list-wrap").style.height = 0
+		}
+	} else return
+})
+//*----------------------- Filter Accordeon Menu End ----------------------------//
+
 //*----------------------- Сhange the content output grid Start ----------------------------//
 function renderCards(cars, carList) {
 	carList.innerHTML = ""
@@ -228,44 +294,7 @@ function createCardHTML(car) {
 
 function getSimbildings(domEl) {
 	return Array.from(domEl.parentElement.children).filter(
-		(value) => value != domEl
+		value => value != domEl
 	)
 }
 //------------------------- Utils end--------------------------//
-
-let divsListEl = filterFormEl.querySelectorAll(".inputs-list")
-
-const heightDivsList = Array.from(divsListEl).map((item) => item.clientHeight)
-
-divsListEl.forEach((item) => item.setAttribute("style", "height: 0"))
-
-filterFormEl.addEventListener("click", (event) => {
-	const filterLegendEl = event.target.closest(".filter__legend")
-
-	if (filterLegendEl) {
-		filterLegendEl.classList.toggle("active")
-
-		const divListEl = event.target
-			.closest(".filter__fildset")
-			.querySelector(".inputs-list")
-
-		const heightDivList = heightDivsList[divListEl.dataset.input_number]
-
-		if (filterLegendEl.classList.contains("active")) {
-			if (heightDivList > 600 && heightDivList < 1000) {
-				divListEl.setAttribute(
-					"style",
-					`height: ${heightDivList}px; transition: 1s`
-				)
-			} else if (heightDivList > 1000) {
-				divListEl.setAttribute(
-					"style",
-					`height: ${heightDivList}px; transition: 1.5s`
-				)
-			} else divListEl.setAttribute("style", `height: ${heightDivList}px`)
-		} else {
-			divListEl.style.height = "0"
-		}
-		console.log(heightDivList)
-	} else return
-})

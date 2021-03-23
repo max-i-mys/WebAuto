@@ -503,20 +503,29 @@ button {
 	align-items: center;
 	justify-content: center;
 	text-transform: capitalize;
+	cursor: pointer;
 }
 .filter__legend i {
 	font-size: 16px;
 	margin-left: 5px;
-	transition: 0.5s;
+	transition: 0.4s;
+	opacity: 0.5;
 }
-.filter__legend.active i {
+.filter__fildset.active .filter__legend i {
 	transform: rotate(90deg);
+	opacity: 1;
 }
 .filter__label {
 	cursor: pointer;
 }
 .filter__label:hover span {
 	color: #198754c7;
+}
+.inputs-list-wrap {
+	height: 0;
+	overflow: hidden;
+	max-height: 250px;
+	transition: height 0.4s;
 }
 .inputs-list {
 	background: linear-gradient(
@@ -525,8 +534,8 @@ button {
 		rgba(191, 191, 191, 1) 50%,
 		transparent 51%
 	);
-	overflow: hidden;
-	transition: 0.4s;
+	max-height: 200px;
+	overflow: auto;
 }
 .filter__btn-wrap {
 	display: flex;
