@@ -173,8 +173,8 @@ button {
 }
 .btn-common {
 	background: transparent;
-	padding: 10px;
-	min-width: 80px;
+	padding: 7px;
+	min-width: 70px;
 	border-radius: 20px;
 	border: 2px solid;
 	transition: 0.3s;

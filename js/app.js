@@ -1,5 +1,6 @@
 "use strict"
 //!----------------------- Variable Start ----------------------------//
+
 let CARS = JSON.parse(DATA)
 const carListEl = document.getElementById("carList")
 const euroExchange = 0.82
@@ -7,6 +8,9 @@ const masonryBtnsEl = document.getElementById("masonryBtns")
 const sortSelectEl = document.getElementById("sortSelect")
 const searchFormEl = document.getElementById("searchForm")
 const filterFormEl = document.getElementById("filterForm")
+const filterBtnApplyEl = document.getElementById("filterBtnApply")
+const filterBtnResetEl = document.getElementById("filterBtnReset")
+
 //!----------------------- Variable End ----------------------------//
 
 renderCards(CARS, carListEl)
@@ -81,18 +85,40 @@ searchFormEl.addEventListener("submit", function (event) {
 //*----------------------- Search End ----------------------------//
 //*----------------------- Filter Start ----------------------------//
 
-//----------//
+//----------------------- Filter Counter Start -----------------//
+filterFormEl.addEventListener("click", function (event) {
+	const inputsEl = event.target.closest(".filter__checkbox")
+	if (inputsEl) {
+		const inputCheck = Array.from(this).some(item => item.checked)
+		if (inputCheck) {
+			filterBtnApplyEl.innerHTML = `Show (<span>${filtering(this)}</span>)`
+		} else {
+			filterBtnApplyEl.innerHTML = `Filter`
+		}
+	} else return
+})
+
+filterBtnResetEl.addEventListener("click", function (event) {
+	filterBtnApplyEl.innerHTML = `Filter`
+})
+//----------------------- Filter Counter End -----------------//
 
 filterFormEl.addEventListener("submit", function (event) {
 	event.preventDefault()
-
 	filtering(this)
 	renderCards(CARS, carListEl)
 })
 
 function filtering(formEl) {
 	const query = []
-	const filterFields = ["make", "fuel", "transmission"]
+	const filterFields = [
+		"make",
+		"year",
+		"color",
+		"country",
+		"fuel",
+		"transmission",
+	]
 
 	filterFields.forEach(field => {
 		const inputs =
@@ -107,7 +133,6 @@ function filtering(formEl) {
 			}, [])
 		)
 	})
-	console.log(query)
 	CARS = JSON.parse(DATA).filter(car => {
 		return query.every((values, i) => {
 			return values.length == 0
@@ -117,8 +142,6 @@ function filtering(formEl) {
 	})
 	return CARS.length
 }
-
-//----------//
 
 renderFilterForm(CARS, filterFormEl)
 
@@ -158,7 +181,7 @@ function createFilterFieldset(field, values) {
 function createFilterCheckbox(field, value) {
 	return `<label class="d-flex filter__label">
 		<input type="checkbox" name="${field}" value="${value}" class="filter__checkbox">
-		<span>${value}</span>
+		<span class="title-checkbox">${value}</span>
 	</label>`
 }
 //*----------------------- Filter End ----------------------------//
@@ -168,7 +191,6 @@ filterFormEl.addEventListener("click", function (event) {
 	const nameLegendEl = event.target.closest(".filter__legend")
 	if (nameLegendEl) {
 		const filterFieldsetEl = event.target.closest(".filter__fildset")
-
 		if (!filterFieldsetEl.classList.contains("active")) {
 			filterFieldsetEl.classList.add("active")
 			filterFieldsetEl.querySelector(".inputs-list-wrap").style.height =
