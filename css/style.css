@@ -559,4 +559,12 @@ button {
 .btn-common[type="submit"]:hover {
 	background-color: var(--theme-color-2);
 }
+.btn-common:disabled {
+	cursor: initial;
+	opacity: 0.5;
+}
+.btn-common:disabled:hover {
+	background-color: transparent;
+	color: var(--theme-color-2);
+}
 /*TODO================ Filter end =================*/

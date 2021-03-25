@@ -9,7 +9,6 @@ const sortSelectEl = document.getElementById("sortSelect")
 const searchFormEl = document.getElementById("searchForm")
 const filterFormEl = document.getElementById("filterForm")
 const filterBtnApplyEl = document.getElementById("filterBtnApply")
-const filterBtnResetEl = document.getElementById("filterBtnReset")
 
 //!----------------------- Variable End ----------------------------//
 
@@ -88,18 +87,24 @@ searchFormEl.addEventListener("submit", function (event) {
 //----------------------- Filter Counter Start -----------------//
 filterFormEl.addEventListener("click", function (event) {
 	const inputsEl = event.target.closest(".filter__checkbox")
+	const accWrapEl = event.target.closest(".acc-wrap")
+	const accHeadEl = event.target.closest(".acc-head")
+	const btnResetEl = event.target.closest(".btn-reset")
 	if (inputsEl) {
 		const inputCheck = Array.from(this).some(item => item.checked)
 		if (inputCheck) {
-			filterBtnApplyEl.innerHTML = `Show (<span>${filtering(this)}</span>)`
+			filterBtnApplyEl.innerHTML = `Show (${filtering(this)})`
+			filterBtnApplyEl.disabled = false
 		} else {
 			filterBtnApplyEl.innerHTML = `Filter`
+			filterBtnApplyEl.disabled = true
 		}
-	} else return
-})
-
-filterBtnResetEl.addEventListener("click", function (event) {
-	filterBtnApplyEl.innerHTML = `Filter`
+	} else if (accHeadEl) {
+		accordeon(accWrapEl)
+	} else if (btnResetEl) {
+		filterBtnApplyEl.innerHTML = `Filter`
+		filterBtnApplyEl.disabled = true
+	}
 })
 //----------------------- Filter Counter End -----------------//
 
@@ -169,10 +174,10 @@ function createFilterForm(cars) {
 function createFilterFieldset(field, values) {
 	let inputsHtml = ""
 	values.forEach(value => (inputsHtml += createFilterCheckbox(field, value)))
-	return `<fieldset class="mb-3 filter__fildset">
-				<legend class="mb-3 filter__legend">${field}<i class="fas fa-caret-right"></i></legend>
-				<div class="inputs-list-wrap">
-					<div class="inputs-list">
+	return `<fieldset class="mb-3 filter__fildset acc-wrap">
+				<legend class="mb-3 filter__legend acc-head">${field}<i class="fas fa-caret-right"></i></legend>
+				<div class="inputs-list-wrap acc-collapse">
+					<div class="inputs-list acc-body">
 						${inputsHtml}
 					</div>
 				</div>
@@ -187,21 +192,16 @@ function createFilterCheckbox(field, value) {
 //*----------------------- Filter End ----------------------------//
 
 //*----------------------- Filter Accordeon Menu Start ----------------------------//
-filterFormEl.addEventListener("click", function (event) {
-	const nameLegendEl = event.target.closest(".filter__legend")
-	if (nameLegendEl) {
-		const filterFieldsetEl = event.target.closest(".filter__fildset")
-		if (!filterFieldsetEl.classList.contains("active")) {
-			filterFieldsetEl.classList.add("active")
-			filterFieldsetEl.querySelector(".inputs-list-wrap").style.height =
-				filterFieldsetEl.querySelector(".inputs-list").getBoundingClientRect()
-					.height + "px"
-		} else {
-			filterFieldsetEl.classList.remove("active")
-			filterFieldsetEl.querySelector(".inputs-list-wrap").style.height = 0
-		}
-	} else return
-})
+function accordeon(wrapEl) {
+	if (!wrapEl.classList.contains("active")) {
+		wrapEl.classList.add("active")
+		wrapEl.querySelector(".acc-collapse").style.height =
+			wrapEl.querySelector(".acc-body").getBoundingClientRect().height + "px"
+	} else {
+		wrapEl.classList.remove("active")
+		wrapEl.querySelector(".acc-collapse").style.height = 0
+	}
+}
 //*----------------------- Filter Accordeon Menu End ----------------------------//
 
 //*----------------------- Сhange the content output grid Start ----------------------------//
