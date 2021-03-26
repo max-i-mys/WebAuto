@@ -10,15 +10,32 @@ const searchFormEl = document.getElementById("searchForm")
 const filterFormEl = document.getElementById("filterForm")
 const filterBtnApplyEl = document.getElementById("filterBtnApply")
 
+if (!localStorage.getItem("wishList")) {
+	localStorage.setItem("wishList", JSON.stringify([]))
+}
+const wishListLS = JSON.parse(localStorage.getItem("wishList"))
+
 //!----------------------- Variable End ----------------------------//
 
 renderCards(CARS, carListEl)
 
 //*----------------------- Favorites and Comparison Start ----------------------------//
 carListEl.addEventListener("click", event => {
-	const btnInteractionEl = event.target.closest(".card__btn-interaction")
-	if (btnInteractionEl) {
-		btnInteractionEl.classList.toggle("active")
+	const btnStarEl = event.target.closest(".card__btn-star")
+	const btnCompareEl = event.target.closest(".card__btn-compare")
+	if (btnStarEl) {
+		const carId = btnStarEl.closest(".car").dataset.id
+		const wishedCarIndex = wishListLS.findIndex(id => id === carId)
+		if (wishedCarIndex !== -1) {
+			wishListLS.splice(wishedCarIndex, 1)
+			btnStarEl.classList.remove("active")
+		} else {
+			wishListLS.push(carId)
+			btnStarEl.classList.add("active")
+		}
+		localStorage.setItem("wishList", JSON.stringify(wishListLS))
+	} else if (btnCompareEl) {
+		btnCompareEl.classList.toggle("active")
 	}
 })
 //*----------------------- Favorites and Comparison End ----------------------------//
@@ -95,9 +112,11 @@ filterFormEl.addEventListener("click", function (event) {
 		if (inputCheck) {
 			filterBtnApplyEl.innerHTML = `Show (${filtering(this)})`
 			filterBtnApplyEl.disabled = false
+			this.querySelector(".btn-reset").disabled = false
 		} else {
 			filterBtnApplyEl.innerHTML = `Filter`
 			filterBtnApplyEl.disabled = true
+			this.querySelector(".btn-reset").disabled = true
 		}
 	} else if (accHeadEl) {
 		accordeon(accWrapEl)
@@ -226,7 +245,7 @@ function createCardHTML(car) {
 		}
 	}
 	return `
-	<div class="py-5 border-bottom">
+	<div class="car py-5 border-bottom" data-id="${car.id}">
 	<div class="row g-0">
 		<div class="col-4 card-img-wrap d-flex position-relative">
 			<img class="card-img" src="${car.img}" alt="${car.make} ${
@@ -306,8 +325,10 @@ function createCardHTML(car) {
 					<span class="date">Created ${car.timestamp}</span>
 					<div class="card__interaction">
 						<a href="tel:${car.phone}"><i class="_icon-tel"></i></a>
-						<button class="card__btn-interaction"><i class="_icon-star"></i></button>
-						<button class="card__btn-interaction"><i class="_icon-compare"></i></button>
+						<button class="card__btn-interaction card__btn-star ${
+							wishListLS.includes(car.id) ? "active" : ""
+						}"><i class="_icon-star"></i></button>
+						<button class="card__btn-interaction card__btn-compare"><i class="_icon-compare"></i></button>
 					</div>
 				</div>
 			</div>`
