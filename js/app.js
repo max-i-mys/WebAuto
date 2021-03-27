@@ -169,6 +169,7 @@ function filtering(formEl) {
 	const query = []
 	const filterFields = [
 		"make",
+		"model",
 		"year",
 		"color",
 		"country",
@@ -208,6 +209,7 @@ function renderFilterForm(cars, filterForm) {
 function createFilterForm(cars) {
 	const filterFields = [
 		"make",
+		"model",
 		"year",
 		"color",
 		"country",
