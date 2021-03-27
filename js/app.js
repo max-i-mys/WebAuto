@@ -9,6 +9,9 @@ const sortSelectEl = document.getElementById("sortSelect")
 const searchFormEl = document.getElementById("searchForm")
 const filterFormEl = document.getElementById("filterForm")
 const filterBtnApplyEl = document.getElementById("filterBtnApply")
+const wishListLinkEl = document.getElementById("wishListLink")
+const wishlistCounterEl = document.getElementById("wishlistCounter")
+const homeLinkEl = document.getElementById("homeLink")
 
 if (!localStorage.getItem("wishList")) {
 	localStorage.setItem("wishList", JSON.stringify([]))
@@ -19,7 +22,25 @@ const wishListLS = JSON.parse(localStorage.getItem("wishList"))
 
 renderCards(CARS, carListEl)
 
+//*----------------------- A home page link Start ----------------------------//
+homeLinkEl.addEventListener("click", event => {
+	event.preventDefault()
+	CARS = JSON.parse(DATA)
+	renderCards(CARS, carListEl, true)
+})
+//*----------------------- A home page link End ----------------------------//
+
 //*----------------------- Favorites and Comparison Start ----------------------------//
+
+function setValueLink(wishList, wishListLink) {
+	if (wishList.length == 0) {
+		wishListLink.classList.add("disabled")
+	} else wishListLink.classList.remove("disabled")
+}
+
+wishlistCounterEl.innerHTML = wishListLS.length
+setValueLink(wishListLS, wishListLinkEl)
+
 carListEl.addEventListener("click", event => {
 	const btnStarEl = event.target.closest(".card__btn-star")
 	const btnCompareEl = event.target.closest(".card__btn-compare")
@@ -33,11 +54,22 @@ carListEl.addEventListener("click", event => {
 			wishListLS.push(carId)
 			btnStarEl.classList.add("active")
 		}
+		setValueLink(wishListLS, wishListLinkEl)
+		wishlistCounterEl.innerHTML = wishListLS.length
 		localStorage.setItem("wishList", JSON.stringify(wishListLS))
 	} else if (btnCompareEl) {
 		btnCompareEl.classList.toggle("active")
 	}
 })
+
+wishListLinkEl.addEventListener("click", function (event) {
+	event.preventDefault()
+	if (wishListLS.length > 0) {
+		CARS = JSON.parse(DATA).filter(car => wishListLS.includes(car["id"]))
+		renderCards(CARS, carListEl, true)
+	}
+})
+
 //*----------------------- Favorites and Comparison End ----------------------------//
 
 //*----------------------- Сhange the content output grid Start ----------------------------//
@@ -74,7 +106,7 @@ sortSelectEl.addEventListener("change", function (event) {
 			return a[key].localeCompare(b[key]) * order
 		}
 	})
-	renderCards(CARS, carListEl)
+	renderCards(CARS, carListEl, true)
 })
 //*----------------------- Sort End ----------------------------//
 
@@ -96,7 +128,7 @@ searchFormEl.addEventListener("submit", function (event) {
 		})
 	})
 
-	renderCards(CARS, carListEl)
+	renderCards(CARS, carListEl, true)
 })
 //*----------------------- Search End ----------------------------//
 //*----------------------- Filter Start ----------------------------//
@@ -130,7 +162,7 @@ filterFormEl.addEventListener("click", function (event) {
 filterFormEl.addEventListener("submit", function (event) {
 	event.preventDefault()
 	filtering(this)
-	renderCards(CARS, carListEl)
+	renderCards(CARS, carListEl, true)
 })
 
 function filtering(formEl) {
@@ -224,8 +256,8 @@ function accordeon(wrapEl) {
 //*----------------------- Filter Accordeon Menu End ----------------------------//
 
 //*----------------------- Сhange the content output grid Start ----------------------------//
-function renderCards(cars, carList) {
-	carList.innerHTML = ""
+function renderCards(cars, carList, clear) {
+	clear && (carList.innerHTML = "")
 	for (let i = 0; i < cars.length; i++) {
 		const car = cars[i]
 		const htmlString = createCardHTML(car)

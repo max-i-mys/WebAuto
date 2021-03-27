@@ -3,6 +3,7 @@
 
 <head>
 	<link rel="preload" href="css/style.css" as="style" />
+	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="preload" href="fonts/icomoon.ttf?ap9lmr" as="font" type="font/ttf" crossorigin="anonymous">
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,53 +20,66 @@
 </head>
 
 <body>
-	<div class="container">
-		<h1 class="text-center">Car list</h1>
-		<hr />
-		<div class="row">
-			<div class="col-3 filter-bar">
-				<form id="filterForm" class="filter">
-					<div class="filter__btn-wrap">
-						<button type="submit" class="btn-common" id="filterBtnApply" disabled>Filter</button>
-						<button type="reset" class="btn-common btn-reset" disabled>Reset</button>
-					</div>
-				</form>
+	<header class="header">
+		<div class="container">
+			<h1 class="text-center">Car list</h1>
+			<div class="header__menu">
+				<a href="#" class="header__home-link" id="homeLink">Home</a>
+				<a href="#" class="header__wishlist-link disabled" id="wishListLink">Your wishlist
+					<i class="fas fa-star header__wishlist-star">
+						<span class="header__wishlist-counter" id="wishlistCounter">0</span>
+					</i>
+				</a>
 			</div>
-			<div class="col-9 content-bar">
-				<div class="col-12 top-bar d-flex">
-					<select class="form-control content__sort" id="sortSelect">
-						<option value="" disabled selected>Сортировать по...</option>
-						<option value="price/1">По цене (от дешевых к дорогим)</option>
-						<option value="price/-1">По цене (от дорогих к дешевым)</option>
-						<option value="year/-1">По году (от новых к старым)</option>
-						<option value="year/1">По году (от старых к новым)</option>
-						<option value="make/1">По производителю (A-Z)</option>
-						<option value="make/-1">По производителю (Z-A)</option>
-						<option value="rating/-1">По году рейтингу</option>
-						<option value="engine_volume/1">По объему двигателя</option>
-						<option value="views/-1">По количеству просмотров</option>
-						<option value="odo/1">По пробегу (от меньшего к большему)</option>
-						<option value="odo/-1">По пробегу (от большему к меньшему)</option>
-						<option value="vip/-1">Сначала VIP</option>
-					</select>
-
-					<form id="searchForm" class="content__search">
-						<input type="search" placeholder="Search" name="search" class="content__input" />
-						<button class="content__btn" type="submit"><i class="fas fa-search"></i></button>
+		</div>
+	</header>
+	<hr />
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-3 filter-bar">
+					<form id="filterForm" class="filter">
+						<div class="filter__btn-wrap">
+							<button type="submit" class="btn-common" id="filterBtnApply" disabled>Filter</button>
+							<button type="reset" class="btn-common btn-reset" disabled>Reset</button>
+						</div>
 					</form>
-
-					<div class="masonry-btns" id="masonryBtns">
-						<button class="btn btn-success" data-action="1"><i class="fas fa-bars"></i></button>
-						<button class="btn btn-secondary" data-action="2"><i class="fas fa-th-large"></i></button>
-					</div>
 				</div>
-				<div class="row g-0 row-cols-1 car-list" id="carList">
+				<div class="col-9 content-bar">
+					<div class="col-12 top-bar d-flex">
+						<select class="form-control content__sort" id="sortSelect">
+							<option value="" disabled selected>Сортировать по...</option>
+							<option value="price/1">По цене (от дешевых к дорогим)</option>
+							<option value="price/-1">По цене (от дорогих к дешевым)</option>
+							<option value="year/-1">По году (от новых к старым)</option>
+							<option value="year/1">По году (от старых к новым)</option>
+							<option value="make/1">По производителю (A-Z)</option>
+							<option value="make/-1">По производителю (Z-A)</option>
+							<option value="rating/-1">По году рейтингу</option>
+							<option value="engine_volume/1">По объему двигателя</option>
+							<option value="views/-1">По количеству просмотров</option>
+							<option value="odo/1">По пробегу (от меньшего к большему)</option>
+							<option value="odo/-1">По пробегу (от большему к меньшему)</option>
+							<option value="vip/-1">Сначала VIP</option>
+						</select>
 
+						<form id="searchForm" class="content__search">
+							<input type="search" placeholder="Search" name="search" class="content__input" />
+							<button class="content__btn" type="submit"><i class="fas fa-search"></i></button>
+						</form>
+
+						<div class="masonry-btns" id="masonryBtns">
+							<button class="btn btn-success" data-action="1"><i class="fas fa-bars"></i></button>
+							<button class="btn btn-secondary" data-action="2"><i class="fas fa-th-large"></i></button>
+						</div>
+					</div>
+					<div class="row g-0 row-cols-1 car-list" id="carList">
+
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
+	</main>
 	<!-- JavaScript Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
