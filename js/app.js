@@ -12,6 +12,7 @@ const filterBtnApplyEl = document.getElementById("filterBtnApply")
 const wishListLinkEl = document.getElementById("wishListLink")
 const wishlistCounterEl = document.getElementById("wishlistCounter")
 const homeLinkEl = document.getElementById("homeLink")
+const paginationListEl = document.getElementById("paginationList")
 
 if (!localStorage.getItem("wishList")) {
 	localStorage.setItem("wishList", JSON.stringify([]))
@@ -375,3 +376,67 @@ function getSimbildings(domEl) {
 	)
 }
 //------------------------- Utils end--------------------------//
+
+//*----------------------- Pagination Start ----------------------------//
+renderPaginItem(paginationListEl)
+
+function createPaginItem(cars, numberCarPage) {
+	let listsHtml = ""
+	for (let i = 1; i <= Math.floor(cars.length / numberCarPage); i++) {
+		listsHtml += `<li class="page-nav__item" data-item="${i}"><a href="#" class="page-nav__link" >${i}</a></li>`
+	}
+	return listsHtml
+}
+function renderPaginItem(paginationList) {
+	paginationList.insertAdjacentHTML("afterBegin", createPaginItem(CARS, 6))
+}
+
+//-----------------------------------------------------------------------//
+
+paginationListEl.firstElementChild.classList.add("active")
+paginationListEl.lastElementChild.classList.add("visible")
+
+function addClassSiblings(pageItem) {
+	if (pageItem.previousElementSibling && pageItem.nextElementSibling) {
+		pageItem.previousElementSibling.classList.add("visible")
+		pageItem.nextElementSibling.classList.add("visible")
+		if (
+			pageItem.previousElementSibling.previousElementSibling &&
+			pageItem.nextElementSibling.nextElementSibling
+		) {
+			pageItem.previousElementSibling.previousElementSibling.classList.add(
+				"visible"
+			)
+			pageItem.nextElementSibling.nextElementSibling.classList.add("visible")
+		}
+	} else if (pageItem.nextElementSibling) {
+		pageItem.nextElementSibling.classList.add("visible")
+		if (pageItem.nextElementSibling.nextElementSibling) {
+			pageItem.nextElementSibling.nextElementSibling.classList.add("visible")
+		}
+	} else if (pageItem.previousElementSibling) {
+		pageItem.previousElementSibling.classList.add("visible")
+		if (pageItem.previousElementSibling.previousElementSibling)
+			pageItem.previousElementSibling.previousElementSibling.classList.add(
+				"visible"
+			)
+	}
+}
+
+addClassSiblings(paginationListEl.firstElementChild)
+
+paginationListEl.addEventListener("click", function (event) {
+	event.preventDefault()
+	const pageItemActive = event.target.closest(".page-nav__item")
+
+	if (pageItemActive) {
+		Array.from(this.children).forEach(item => {
+			item.classList.remove("active")
+			item.classList.remove("visible")
+		})
+		pageItemActive.classList.add("active")
+		addClassSiblings(pageItemActive)
+	}
+})
+
+//*----------------------- Pagination End ----------------------------//
