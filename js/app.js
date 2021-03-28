@@ -394,7 +394,6 @@ function renderPaginItem(paginationList) {
 //-----------------------------------------------------------------------//
 
 paginationListEl.firstElementChild.classList.add("active")
-paginationListEl.lastElementChild.classList.add("visible")
 
 function addClassSiblings(pageItem) {
 	if (pageItem.previousElementSibling && pageItem.nextElementSibling) {
