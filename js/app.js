@@ -13,6 +13,7 @@ const wishListLinkEl = document.getElementById("wishListLink")
 const wishlistCounterEl = document.getElementById("wishlistCounter")
 const homeLinkEl = document.getElementById("homeLink")
 const paginationListEl = document.getElementById("paginationList")
+const carsOnPage = 6
 
 if (!localStorage.getItem("wishList")) {
 	localStorage.setItem("wishList", JSON.stringify([]))
@@ -20,8 +21,6 @@ if (!localStorage.getItem("wishList")) {
 const wishListLS = JSON.parse(localStorage.getItem("wishList"))
 
 //!----------------------- Variable End ----------------------------//
-
-renderCards(CARS, carListEl)
 
 //*----------------------- A home page link Start ----------------------------//
 homeLinkEl.addEventListener("click", event => {
@@ -388,7 +387,10 @@ function createPaginItem(cars, numberCarPage) {
 	return listsHtml
 }
 function renderPaginItem(paginationList) {
-	paginationList.insertAdjacentHTML("afterBegin", createPaginItem(CARS, 6))
+	paginationList.insertAdjacentHTML(
+		"afterBegin",
+		createPaginItem(CARS, carsOnPage)
+	)
 }
 
 //-----------------------------------------------------------------------//
@@ -435,7 +437,16 @@ paginationListEl.addEventListener("click", function (event) {
 		})
 		pageItemActive.classList.add("active")
 		addClassSiblings(pageItemActive)
+		const numberPage = pageItemActive.dataset.item - 1
+		renderCarsOnPage(numberPage)
+		renderCards(CARS, carListEl, true)
 	}
 })
-
+function renderCarsOnPage(numberPage) {
+	return (CARS = Object.assign(JSON.parse(DATA)).slice(
+		numberPage * carsOnPage,
+		numberPage * carsOnPage + carsOnPage
+	))
+}
+renderCards(renderCarsOnPage(0), carListEl, true)
 //*----------------------- Pagination End ----------------------------//
