@@ -26,7 +26,7 @@ const wishListLS = JSON.parse(localStorage.getItem("wishList"))
 homeLinkEl.addEventListener("click", event => {
 	event.preventDefault()
 	CARS = JSON.parse(DATA)
-	renderCards(CARS, carListEl, true)
+	renderCards(CARS, carListEl)
 })
 //*----------------------- A home page link End ----------------------------//
 
@@ -66,7 +66,7 @@ wishListLinkEl.addEventListener("click", function (event) {
 	event.preventDefault()
 	if (wishListLS.length > 0) {
 		CARS = JSON.parse(DATA).filter(car => wishListLS.includes(car["id"]))
-		renderCards(CARS, carListEl, true)
+		renderCards(CARS, carListEl)
 	}
 })
 
@@ -91,7 +91,7 @@ masonryBtnsEl.addEventListener("click", event => {
 
 	btnMasonryEl.classList.remove("btn-secondary")
 	btnMasonryEl.classList.add("btn-success")
-	getSimbildings(btnMasonryEl).forEach(sibling => {
+	getSiblings(btnMasonryEl).forEach(sibling => {
 		sibling.classList.remove("btn-success")
 		sibling.classList.add("btn-secondary")
 	})
@@ -106,7 +106,7 @@ sortSelectEl.addEventListener("change", function (event) {
 			return a[key].localeCompare(b[key]) * order
 		}
 	})
-	renderCards(CARS, carListEl, true)
+	renderCards(CARS, carListEl, location.hash.slice(1))
 })
 //*----------------------- Sort End ----------------------------//
 
@@ -128,7 +128,7 @@ searchFormEl.addEventListener("submit", function (event) {
 		})
 	})
 
-	renderCards(CARS, carListEl, true)
+	renderCards(CARS, carListEl)
 })
 //*----------------------- Search End ----------------------------//
 //*----------------------- Filter Start ----------------------------//
@@ -157,12 +157,16 @@ filterFormEl.addEventListener("click", function (event) {
 		filterBtnApplyEl.disabled = true
 	}
 })
+filterFormEl.addEventListener("change",(event) => console.log(event))
+filterFormEl.addEventListener("reset",(event) => console.log(event))
 //----------------------- Filter Counter End -----------------//
 
 filterFormEl.addEventListener("submit", function (event) {
 	event.preventDefault()
 	filtering(this)
-	renderCards(CARS, carListEl, true)
+	console.log(CARS.length);
+	renderPaginItem(CARS, paginationListEl)
+	renderCards(CARS, carListEl)
 })
 
 function filtering(formEl) {
@@ -258,16 +262,15 @@ function accordeon(wrapEl) {
 //*----------------------- Filter Accordeon Menu End ----------------------------//
 
 //*----------------------- Сhange the content output grid Start ----------------------------//
-function renderCards(cars, carList, clear) {
-	clear && (carList.innerHTML = "")
-	for (let i = 0; i < cars.length; i++) {
-		const car = cars[i]
-		const htmlString = createCardHTML(car)
-		carList.insertAdjacentHTML("beforeEnd", htmlString)
+function renderCards(cars, carList, start = 0) {
+	carList.innerHTML = ""
+	for (let i = 0; i < carsOnPage; i++) {
+		const car = cars[i + start]
+		car && carList.insertAdjacentHTML("beforeEnd", createCardHTML(car, i + start))
 	}
 }
 
-function createCardHTML(car) {
+function createCardHTML(car, idx) {
 	let starsHtml = ""
 	for (let i = 0; i < 5; i++) {
 		if (car.rating > i && car.rating != i + 0.5) {
@@ -297,6 +300,7 @@ function createCardHTML(car) {
 		<div class="col-8 card-body-wrap">
 			<div class="row card-body">
 				<div class="col-7">
+					${idx}
 					<a href="#" class="card-title fw-bold mb-2">${car.make} ${car.model} ${
 		car.year
 	}(${car.color})</a>
@@ -369,7 +373,7 @@ function createCardHTML(car) {
 }
 //------------------------- Utils start--------------------------//
 
-function getSimbildings(domEl) {
+function getSiblings(domEl) {
 	return Array.from(domEl.parentElement.children).filter(
 		value => value != domEl
 	)
@@ -377,20 +381,17 @@ function getSimbildings(domEl) {
 //------------------------- Utils end--------------------------//
 
 //*----------------------- Pagination Start ----------------------------//
-renderPaginItem(paginationListEl)
+renderPaginItem(CARS, paginationListEl)
 
 function createPaginItem(cars, numberCarPage) {
 	let listsHtml = ""
-	for (let i = 1; i <= Math.floor(cars.length / numberCarPage); i++) {
-		listsHtml += `<li class="page-nav__item" data-item="${i}"><a href="#" class="page-nav__link" >${i}</a></li>`
+	for (let i = 0; i < Math.ceil(cars.length / numberCarPage); i++) {
+		listsHtml += `<li class="page-nav__item" data-item="${i}"><a href="#${i}" class="page-nav__link" >${i+1}</a></li>`
 	}
 	return listsHtml
 }
-function renderPaginItem(paginationList) {
-	paginationList.insertAdjacentHTML(
-		"afterBegin",
-		createPaginItem(CARS, carsOnPage)
-	)
+function renderPaginItem(cars, paginationList) {
+	paginationList.innerHTML = createPaginItem(cars, carsOnPage)
 }
 
 //-----------------------------------------------------------------------//
@@ -398,55 +399,29 @@ function renderPaginItem(paginationList) {
 paginationListEl.firstElementChild.classList.add("active")
 
 function addClassSiblings(pageItem) {
-	if (pageItem.previousElementSibling && pageItem.nextElementSibling) {
-		pageItem.previousElementSibling.classList.add("visible")
-		pageItem.nextElementSibling.classList.add("visible")
-		if (
-			pageItem.previousElementSibling.previousElementSibling &&
-			pageItem.nextElementSibling.nextElementSibling
-		) {
-			pageItem.previousElementSibling.previousElementSibling.classList.add(
-				"visible"
-			)
-			pageItem.nextElementSibling.nextElementSibling.classList.add("visible")
-		}
-	} else if (pageItem.nextElementSibling) {
-		pageItem.nextElementSibling.classList.add("visible")
-		if (pageItem.nextElementSibling.nextElementSibling) {
-			pageItem.nextElementSibling.nextElementSibling.classList.add("visible")
-		}
-	} else if (pageItem.previousElementSibling) {
-		pageItem.previousElementSibling.classList.add("visible")
-		if (pageItem.previousElementSibling.previousElementSibling)
-			pageItem.previousElementSibling.previousElementSibling.classList.add(
-				"visible"
-			)
-	}
+	const targetSiblings = Array.from(pageItem.parentElement.children)
+	const targetIdx = targetSiblings.findIndex(item => item === pageItem)
+	targetSiblings.filter((el, i) => {
+		return i !== targetIdx && i >= targetIdx - 2 && i <= targetIdx + 2
+	}).forEach(el => el.classList.add("visible"))
 }
 
 addClassSiblings(paginationListEl.firstElementChild)
 
 paginationListEl.addEventListener("click", function (event) {
-	event.preventDefault()
+	
 	const pageItemActive = event.target.closest(".page-nav__item")
-
 	if (pageItemActive) {
-		Array.from(this.children).forEach(item => {
+		getSiblings(pageItemActive).forEach(item => {
 			item.classList.remove("active")
 			item.classList.remove("visible")
 		})
 		pageItemActive.classList.add("active")
 		addClassSiblings(pageItemActive)
-		const numberPage = pageItemActive.dataset.item - 1
-		renderCarsOnPage(numberPage)
-		renderCards(CARS, carListEl, true)
+		const numberPage = pageItemActive.dataset.item
+		renderCards(CARS, carListEl, numberPage * carsOnPage)
 	}
 })
-function renderCarsOnPage(numberPage) {
-	return (CARS = Object.assign(JSON.parse(DATA)).slice(
-		numberPage * carsOnPage,
-		numberPage * carsOnPage + carsOnPage
-	))
-}
-renderCards(renderCarsOnPage(0), carListEl, true)
+
+renderCards(CARS, carListEl)
 //*----------------------- Pagination End ----------------------------//
