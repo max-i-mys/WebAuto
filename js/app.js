@@ -14,6 +14,14 @@ const wishlistCounterEl = document.getElementById("wishlistCounter")
 const homeLinkEl = document.getElementById("homeLink")
 const paginationListEl = document.getElementById("paginationList")
 const carsOnPage = 6
+const dateFormatter = new Intl.DateTimeFormat(undefined, {
+	hour: "2-digit",
+	minute: "2-digit",
+	day: "2-digit",
+	month: "2-digit",
+	year: "numeric",
+})
+const numFormatter = new Intl.NumberFormat("uk", {})
 
 if (!localStorage.getItem("wishList")) {
 	localStorage.setItem("wishList", JSON.stringify([]))
@@ -157,14 +165,14 @@ filterFormEl.addEventListener("click", function (event) {
 		filterBtnApplyEl.disabled = true
 	}
 })
-filterFormEl.addEventListener("change",(event) => console.log(event))
-filterFormEl.addEventListener("reset",(event) => console.log(event))
+filterFormEl.addEventListener("change", event => console.log(event))
+filterFormEl.addEventListener("reset", event => console.log(event))
 //----------------------- Filter Counter End -----------------//
 
 filterFormEl.addEventListener("submit", function (event) {
 	event.preventDefault()
 	filtering(this)
-	console.log(CARS.length);
+	console.log(CARS.length)
 	renderPaginItem(CARS, paginationListEl)
 	renderCards(CARS, carListEl)
 })
@@ -266,7 +274,8 @@ function renderCards(cars, carList, start = 0) {
 	carList.innerHTML = ""
 	for (let i = 0; i < carsOnPage; i++) {
 		const car = cars[i + start]
-		car && carList.insertAdjacentHTML("beforeEnd", createCardHTML(car, i + start))
+		car &&
+			carList.insertAdjacentHTML("beforeEnd", createCardHTML(car, i + start))
 	}
 }
 
@@ -308,7 +317,9 @@ function createCardHTML(car, idx) {
 					<ul class="card__properties">
 					${
 						car.odo
-							? `<li class="card__property"><i class="_icon-speed icons-theme-1"></i>${car.odo} km</li>`
+							? `<li class="card__property"><i class="_icon-speed icons-theme-1"></i>${numFormatter.format(
+									+car.odo
+							  )} km</li>`
 							: ""
 					}
 					${
@@ -339,9 +350,9 @@ function createCardHTML(car, idx) {
 				<div class="col-5 card__lbox">
 				${
 					car.price
-						? `<h6 class="car-price text-success" data-euro="${Math.round(
-								car.price * euroExchange
-						  )}">${car.price}$</h6>`
+						? `<h6 class="car-price text-success" data-euro="${numFormatter.format(
+								Math.round(car.price * euroExchange)
+						  )}">${numFormatter.format(+car.price)}$</h6>`
 						: ""
 				}
 				${
@@ -359,8 +370,8 @@ function createCardHTML(car, idx) {
 					}
 						${car.exchange ? `<span class="label">Exchange</span>` : ""}
 					</div>
-					<span class="views">Views ${car.views}</span>
-					<span class="date">Created ${car.timestamp}</span>
+					<span class="views">Views ${numFormatter.format(+car.views)}</span>
+					<span class="date">Created ${dateFormatter.format(+car.timestamp)}</span>
 					<div class="card__interaction">
 						<a href="tel:${car.phone}"><i class="_icon-tel"></i></a>
 						<button class="card__btn-interaction card__btn-star ${
@@ -386,7 +397,9 @@ renderPaginItem(CARS, paginationListEl)
 function createPaginItem(cars, numberCarPage) {
 	let listsHtml = ""
 	for (let i = 0; i < Math.ceil(cars.length / numberCarPage); i++) {
-		listsHtml += `<li class="page-nav__item" data-item="${i}"><a href="#${i}" class="page-nav__link" >${i+1}</a></li>`
+		listsHtml += `<li class="page-nav__item" data-item="${i}"><a href="#${i}" class="page-nav__link" >${
+			i + 1
+		}</a></li>`
 	}
 	return listsHtml
 }
@@ -401,15 +414,16 @@ paginationListEl.firstElementChild.classList.add("active")
 function addClassSiblings(pageItem) {
 	const targetSiblings = Array.from(pageItem.parentElement.children)
 	const targetIdx = targetSiblings.findIndex(item => item === pageItem)
-	targetSiblings.filter((el, i) => {
-		return i !== targetIdx && i >= targetIdx - 2 && i <= targetIdx + 2
-	}).forEach(el => el.classList.add("visible"))
+	targetSiblings
+		.filter((el, i) => {
+			return i !== targetIdx && i >= targetIdx - 2 && i <= targetIdx + 2
+		})
+		.forEach(el => el.classList.add("visible"))
 }
 
 addClassSiblings(paginationListEl.firstElementChild)
 
 paginationListEl.addEventListener("click", function (event) {
-	
 	const pageItemActive = event.target.closest(".page-nav__item")
 	if (pageItemActive) {
 		getSiblings(pageItemActive).forEach(item => {
