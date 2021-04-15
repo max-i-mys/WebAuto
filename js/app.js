@@ -146,7 +146,6 @@ filterFormEl.addEventListener("click", function (event) {
 	const inputsEl = event.target.closest(".filter__checkbox")
 	const accWrapEl = event.target.closest(".acc-wrap")
 	const accHeadEl = event.target.closest(".acc-head")
-	const btnResetEl = event.target.closest(".btn-reset")
 	if (inputsEl) {
 		const inputCheck = Array.from(this).some(item => item.checked)
 		if (inputCheck) {
@@ -160,19 +159,19 @@ filterFormEl.addEventListener("click", function (event) {
 		}
 	} else if (accHeadEl) {
 		accordeon(accWrapEl)
-	} else if (btnResetEl) {
-		filterBtnApplyEl.innerHTML = `Filter`
-		filterBtnApplyEl.disabled = true
 	}
 })
 filterFormEl.addEventListener("change", event => console.log(event))
-filterFormEl.addEventListener("reset", event => console.log(event))
+filterFormEl.addEventListener("reset", function (event) {
+	this.querySelector(".btn-reset").disabled = true
+	filterBtnApplyEl.innerHTML = `Filter`
+	filterBtnApplyEl.disabled = true
+})
 //----------------------- Filter Counter End -----------------//
 
 filterFormEl.addEventListener("submit", function (event) {
 	event.preventDefault()
 	filtering(this)
-	console.log(CARS.length)
 	renderPaginItem(CARS, paginationListEl)
 	renderCards(CARS, carListEl)
 })
