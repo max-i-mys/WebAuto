@@ -1,7 +1,7 @@
 "use strict"
 //!----------------------- Variable Start ----------------------------//
-
-let CARS = null
+const DATA = []
+let CARS = []
 const carListEl = document.getElementById("carList")
 const euroExchange = 0.82
 const masonryBtnsEl = document.getElementById("masonryBtns")
@@ -31,18 +31,19 @@ const wishListLS = JSON.parse(localStorage.getItem("wishList"))
 //!----------------------- Variable End ----------------------------//
 
 //*----------------------- A home page link Start ----------------------------//
-homeLinkEl.addEventListener("click", async event => {
+homeLinkEl.addEventListener("click", event => {
 	event.preventDefault()
-	CARS = await JSON.parse(DATA)
-	renderCards(CARS, carListEl)
+	getData("../data/cars.json")
 })
 //*----------------------- A home page link End ----------------------------//
 
 //*----------------------- Favorites and Comparison Start ----------------------------//
 
 async function getData(url) {
-	const data = await fetch(url)
-	let CARS = await data.json()
+	const res = await fetch(url)
+	const data = await res.json()
+	DATA.push(...data)
+	CARS = JSON.parse(JSON.stringify(DATA))
 	renderCards(CARS, carListEl)
 	renderFilterForm(CARS, filterFormEl)
 	renderPaginItem(CARS, paginationListEl)
@@ -80,10 +81,10 @@ carListEl.addEventListener("click", event => {
 })
 
 //?------------------------------------//
-wishListLinkEl.addEventListener("click", async function (event) {
+wishListLinkEl.addEventListener("click", function (event) {
 	event.preventDefault()
 	if (wishListLS.length > 0) {
-		CARS = await CARS.filter(car => wishListLS.includes(car["id"]))
+		CARS = DATA.filter(car => wishListLS.includes(car["id"]))
 		renderCards(CARS, carListEl)
 	}
 })
@@ -115,9 +116,9 @@ masonryBtnsEl.addEventListener("click", event => {
 	})
 })
 //*----------------------- Sort Start ----------------------------//
-sortSelectEl.addEventListener("change", async function () {
+sortSelectEl.addEventListener("change", function () {
 	const [key, order] = this.value.split("/")
-	CARS = await CARS.sort((a, b) => {
+	CARS.sort((a, b) => {
 		if (typeof a[key] != "string") {
 			return (a[key] - b[key]) * order
 		} else {
@@ -138,7 +139,7 @@ searchFormEl.addEventListener("submit", function (event) {
 		.filter(word => !!word)
 	const searchFields = ["make", "model", "year"]
 
-	CARS = JSON.parse(DATA).filter(car => {
+	CARS = DATA.filter(car => {
 		return query.every(word => {
 			return searchFields.some(field => {
 				return String(car[field]).trim().toLowerCase().includes(word)
@@ -182,8 +183,8 @@ filterFormEl.addEventListener("reset", function (event) {
 filterFormEl.addEventListener("submit", function (event) {
 	event.preventDefault()
 	filtering(this)
-	renderPaginItem(CARS, paginationListEl)
 	renderCards(CARS, carListEl)
+	renderPaginItem(CARS, paginationListEl)
 })
 
 function filtering(formEl) {
@@ -211,7 +212,7 @@ function filtering(formEl) {
 			}, [])
 		)
 	})
-	CARS = JSON.parse(DATA).filter(car => {
+	CARS = DATA.filter(car => {
 		return query.every((values, i) => {
 			return values.length == 0
 				? true
@@ -222,7 +223,7 @@ function filtering(formEl) {
 }
 
 function renderFilterForm(cars, filterForm) {
-	filterForm.insertAdjacentHTML("afterBegin", createFilterForm(cars))
+	filterForm.firstElementChild.innerHTML = createFilterForm(cars)
 }
 
 function createFilterForm(cars) {
@@ -280,9 +281,9 @@ function accordeon(wrapEl) {
 function renderCards(cars, carList, start = 0) {
 	carList.innerHTML = ""
 	for (let i = 0; i < carsOnPage; i++) {
-		const car = cars[i + start]
+		const car = cars[i + +start]
 		car &&
-			carList.insertAdjacentHTML("beforeEnd", createCardHTML(car, i + start))
+			carList.insertAdjacentHTML("beforeEnd", createCardHTML(car, i + +start))
 	}
 }
 
@@ -411,11 +412,13 @@ function createPaginItem(cars, numberCarPage) {
 }
 function renderPaginItem(cars, paginationList) {
 	paginationList.innerHTML = createPaginItem(cars, carsOnPage)
+	paginationListEl.firstElementChild.classList.add("active")
+	addClassSiblings(paginationListEl.firstElementChild)
 }
 
 //-----------------------------------------------------------------------//
 
-paginationListEl.firstElementChild.classList.add("active")
+
 
 function addClassSiblings(pageItem) {
 	const targetSiblings = Array.from(pageItem.parentElement.children)
@@ -427,7 +430,7 @@ function addClassSiblings(pageItem) {
 		.forEach(el => el.classList.add("visible"))
 }
 
-addClassSiblings(paginationListEl.firstElementChild)
+
 
 paginationListEl.addEventListener("click", function (event) {
 	const pageItemActive = event.target.closest(".page-nav__item")
