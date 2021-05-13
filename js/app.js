@@ -1,7 +1,7 @@
 "use strict"
 //!----------------------- Variable Start ----------------------------//
 
-let CARS = JSON.parse(DATA)
+let CARS = null
 const carListEl = document.getElementById("carList")
 const euroExchange = 0.82
 const masonryBtnsEl = document.getElementById("masonryBtns")
@@ -31,14 +31,23 @@ const wishListLS = JSON.parse(localStorage.getItem("wishList"))
 //!----------------------- Variable End ----------------------------//
 
 //*----------------------- A home page link Start ----------------------------//
-homeLinkEl.addEventListener("click", event => {
+homeLinkEl.addEventListener("click", async event => {
 	event.preventDefault()
-	CARS = JSON.parse(DATA)
+	CARS = await JSON.parse(DATA)
 	renderCards(CARS, carListEl)
 })
 //*----------------------- A home page link End ----------------------------//
 
 //*----------------------- Favorites and Comparison Start ----------------------------//
+
+async function getData(url) {
+	const data = await fetch(url)
+	let CARS = await data.json()
+	renderCards(CARS, carListEl)
+	renderFilterForm(CARS, filterFormEl)
+	renderPaginItem(CARS, paginationListEl)
+}
+getData("../data/cars.json")
 
 function setValueLink(wishList, wishListLink) {
 	if (wishList.length == 0) {
@@ -70,14 +79,15 @@ carListEl.addEventListener("click", event => {
 	}
 })
 
-wishListLinkEl.addEventListener("click", function (event) {
+//?------------------------------------//
+wishListLinkEl.addEventListener("click", async function (event) {
 	event.preventDefault()
 	if (wishListLS.length > 0) {
-		CARS = JSON.parse(DATA).filter(car => wishListLS.includes(car["id"]))
+		CARS = await CARS.filter(car => wishListLS.includes(car["id"]))
 		renderCards(CARS, carListEl)
 	}
 })
-
+//?------------------------------------//
 //*----------------------- Favorites and Comparison End ----------------------------//
 
 //*----------------------- Сhange the content output grid Start ----------------------------//
@@ -105,9 +115,9 @@ masonryBtnsEl.addEventListener("click", event => {
 	})
 })
 //*----------------------- Sort Start ----------------------------//
-sortSelectEl.addEventListener("change", function (event) {
+sortSelectEl.addEventListener("change", async function () {
 	const [key, order] = this.value.split("/")
-	CARS.sort((a, b) => {
+	CARS = await CARS.sort((a, b) => {
 		if (typeof a[key] != "string") {
 			return (a[key] - b[key]) * order
 		} else {
@@ -210,8 +220,6 @@ function filtering(formEl) {
 	})
 	return CARS.length
 }
-
-renderFilterForm(CARS, filterFormEl)
 
 function renderFilterForm(cars, filterForm) {
 	filterForm.insertAdjacentHTML("afterBegin", createFilterForm(cars))
@@ -391,7 +399,6 @@ function getSiblings(domEl) {
 //------------------------- Utils end--------------------------//
 
 //*----------------------- Pagination Start ----------------------------//
-renderPaginItem(CARS, paginationListEl)
 
 function createPaginItem(cars, numberCarPage) {
 	let listsHtml = ""
@@ -435,6 +442,4 @@ paginationListEl.addEventListener("click", function (event) {
 		renderCards(CARS, carListEl, numberPage * carsOnPage)
 	}
 })
-
-renderCards(CARS, carListEl)
 //*----------------------- Pagination End ----------------------------//
