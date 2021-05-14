@@ -3,7 +3,9 @@
 const DATA = []
 let CARS = []
 const carListEl = document.getElementById("carList")
-const euroExchange = 0.82
+const urlExchangeRates =
+	"https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
+let euroIndex = null
 const masonryBtnsEl = document.getElementById("masonryBtns")
 const sortSelectEl = document.getElementById("sortSelect")
 const searchFormEl = document.getElementById("searchForm")
@@ -39,15 +41,29 @@ homeLinkEl.addEventListener("click", event => {
 
 //*----------------------- Favorites and Comparison Start ----------------------------//
 
+async function getExchangeRates(url) {
+	try {
+		const respons = await fetch(url)
+		const data = await respons.json()
+		const ratesDollar = data.find(current => current.ccy === "USD").sale
+		const ratesEuro = data.find(current => current.ccy === "EUR").sale
+		euroIndex = (ratesDollar / ratesEuro).toPrecision(2)
+	} catch (error) {
+		console.log(error)
+	}
+}
+
 async function getData(url) {
-	const res = await fetch(url)
-	const data = await res.json()
+	const respons = await fetch(url)
+	const data = await respons.json()
 	DATA.push(...data)
 	CARS = JSON.parse(JSON.stringify(DATA))
+	await getExchangeRates(urlExchangeRates)
 	renderCards(CARS, carListEl)
 	renderFilterForm(CARS, filterFormEl)
 	renderPaginItem(CARS, paginationListEl)
 }
+
 getData("../data/cars.json")
 
 function setValueLink(wishList, wishListLink) {
@@ -79,8 +95,6 @@ carListEl.addEventListener("click", event => {
 		btnCompareEl.classList.toggle("active")
 	}
 })
-
-//?------------------------------------//
 wishListLinkEl.addEventListener("click", function (event) {
 	event.preventDefault()
 	if (wishListLS.length > 0) {
@@ -88,7 +102,6 @@ wishListLinkEl.addEventListener("click", function (event) {
 		renderCards(CARS, carListEl)
 	}
 })
-//?------------------------------------//
 //*----------------------- Favorites and Comparison End ----------------------------//
 
 //*----------------------- Сhange the content output grid Start ----------------------------//
@@ -359,7 +372,7 @@ function createCardHTML(car, idx) {
 				${
 					car.price
 						? `<h6 class="car-price text-success" data-euro="${numFormatter.format(
-								Math.round(car.price * euroExchange)
+								Math.round(car.price * euroIndex)
 						  )}">${numFormatter.format(+car.price)}$</h6>`
 						: ""
 				}
@@ -418,8 +431,6 @@ function renderPaginItem(cars, paginationList) {
 
 //-----------------------------------------------------------------------//
 
-
-
 function addClassSiblings(pageItem) {
 	const targetSiblings = Array.from(pageItem.parentElement.children)
 	const targetIdx = targetSiblings.findIndex(item => item === pageItem)
@@ -429,8 +440,6 @@ function addClassSiblings(pageItem) {
 		})
 		.forEach(el => el.classList.add("visible"))
 }
-
-
 
 paginationListEl.addEventListener("click", function (event) {
 	const pageItemActive = event.target.closest(".page-nav__item")
