@@ -35,7 +35,7 @@ const wishListLS = JSON.parse(localStorage.getItem("wishList"))
 //*----------------------- A home page link Start ----------------------------//
 homeLinkEl.addEventListener("click", event => {
 	event.preventDefault()
-	getData("../data/cars.json")
+	getData(`${location.href}/data/cars.json`)
 })
 //*----------------------- A home page link End ----------------------------//
 
