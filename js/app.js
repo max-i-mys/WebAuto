@@ -64,7 +64,7 @@ async function getData(url) {
 	renderPaginItem(CARS, paginationListEl)
 }
 
-getData("../data/cars.json")
+getData(`${location.href}/data/cars.json`)
 
 function setValueLink(wishList, wishListLink) {
 	if (wishList.length == 0) {
