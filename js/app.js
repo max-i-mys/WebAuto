@@ -64,7 +64,7 @@ async function getData(url) {
 	renderPaginItem(CARS, paginationListEl)
 }
 
-getData(`${location.href}/data/cars.json`)
+getData("../data/cars.json")
 
 function setValueLink(wishList, wishListLink) {
 	if (wishList.length == 0) {
@@ -300,7 +300,7 @@ function renderCards(cars, carList, start = 0) {
 	}
 }
 
-function createCardHTML(car, idx) {
+function createCardHTML(car) {
 	let starsHtml = ""
 	for (let i = 0; i < 5; i++) {
 		if (car.rating > i && car.rating != i + 0.5) {
@@ -330,7 +330,6 @@ function createCardHTML(car, idx) {
 		<div class="col-8 card-body-wrap">
 			<div class="row card-body">
 				<div class="col-7">
-					${idx}
 					<a href="#" class="card-title fw-bold mb-2">${car.make} ${car.model} ${
 		car.year
 	}(${car.color})</a>
